@@ -2327,6 +2327,14 @@
         "style": "tabs",
         "links": [
           {
+            "id": "5e8a9d46-8041-44fe-96a2-3a606143b199",
+            "cellValue": "network",
+            "linkTarget": "parameter",
+            "linkLabel": "NSG",
+            "subTarget": "nsg",
+            "style": "link"
+          },
+          {
             "id": "11426c5c-1edb-41a5-bb7f-fbfb8bbc4bba",
             "cellValue": "network",
             "linkTarget": "parameter",
@@ -2547,6 +2555,165 @@
       "styleSettings": {
         "padding": "0 0 200px 0"
       }
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "parameters": [
+          {
+            "id": "2a6c17b5-ef20-4ca7-a6f4-00901eb54ed1",
+            "version": "KqlParameterItem/1.0",
+            "name": "nsgWithflowLogs",
+            "label": "NSG With Flow Logs and Traffic Analytics",
+            "type": 5,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "Resources\n| where type =~ 'Microsoft.Network/networkWatchers/flowlogs'\n| extend provisioningState = parse_json(properties).provisioningState \n| extend workspaceResourceId = tostring(parse_json(parse_json(parse_json(properties).flowAnalyticsConfiguration).networkWatcherFlowAnalyticsConfiguration).workspaceResourceId)\n| extend targetResourceId = tostring(parse_json(properties).targetResourceId)\n| where workspaceResourceId != \"\" and provisioningState == \"Succeeded\"\n| distinct targetResourceId\n",
+            "crossComponentResources": [
+              "{Subscriptions}"
+            ],
+            "isHiddenWhenLocked": true,
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "showDefault": false
+            },
+            "defaultValue": "value::all",
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          }
+        ],
+        "style": "above",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "network"
+        },
+        {
+          "parameterName": "network",
+          "comparison": "isEqualTo",
+          "value": "nsgrules"
+        }
+      ],
+      "name": "query - Networking Details - NSG with Flow Logs and Traffic Analytics"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project Subscription = subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs",
+        "size": 1,
+        "title": "Network Security Groups",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Subscription",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": "Resource",
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "Resource group",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": "Resource",
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "Traffic Analytics",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "1",
+                    "representation": "success",
+                    "text": "Enabled"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "0",
+                    "representation": "disabled",
+                    "text": "Disabled"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "unknown",
+                    "text": "unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Flow logs",
+              "formatter": 11,
+              "numberFormat": {
+                "unit": 0,
+                "options": {
+                  "style": "decimal",
+                  "useGrouping": false
+                }
+              }
+            },
+            {
+              "columnMatch": "Resource",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": "Resource",
+                "showIcon": true
+              }
+            }
+          ],
+          "rowLimit": 1000,
+          "filter": true,
+          "sortBy": [
+            {
+              "itemKey": "$gen_thresholds_Traffic Analytics_4",
+              "sortOrder": 2
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "$gen_thresholds_Traffic Analytics_4",
+            "sortOrder": 2
+          }
+        ]
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "network"
+        },
+        {
+          "parameterName": "network",
+          "comparison": "isEqualTo",
+          "value": "nsg"
+        }
+      ],
+      "name": "Network Security Groups"
     },
     {
       "type": 1,
@@ -4701,7 +4868,7 @@
     }
   ],
   "fallbackResourceIds": [
-    "Azure Monitor"
+    "azure monitor"
   ],
   "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
 }
