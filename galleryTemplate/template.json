@@ -2611,8 +2611,8 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project Subscription = subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs",
-        "size": 1,
+        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs",
+        "size": 2,
         "title": "Network Security Groups",
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -2623,11 +2623,18 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "Subscription",
+              "columnMatch": "$gen_group",
               "formatter": 15,
               "formatOptions": {
-                "linkTarget": "Resource",
+                "linkTarget": null,
                 "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "subscriptionId",
+              "formatter": 5,
+              "formatOptions": {
+                "linkTarget": "Resource"
               }
             },
             {
@@ -2666,6 +2673,13 @@
               }
             },
             {
+              "columnMatch": "Subscription",
+              "formatter": 5,
+              "formatOptions": {
+                "linkTarget": "Resource"
+              }
+            },
+            {
               "columnMatch": "Flow logs",
               "formatter": 11,
               "numberFormat": {
@@ -2687,19 +2701,15 @@
           ],
           "rowLimit": 1000,
           "filter": true,
-          "sortBy": [
-            {
-              "itemKey": "$gen_thresholds_Traffic Analytics_4",
-              "sortOrder": 2
-            }
-          ]
-        },
-        "sortBy": [
-          {
-            "itemKey": "$gen_thresholds_Traffic Analytics_4",
-            "sortOrder": 2
+          "hierarchySettings": {
+            "treeType": 1,
+            "groupBy": [
+              "subscriptionId"
+            ],
+            "expandTopLevel": true
           }
-        ]
+        },
+        "sortBy": []
       },
       "conditionalVisibilities": [
         {
