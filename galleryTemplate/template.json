@@ -927,10 +927,58 @@
       }
     },
     {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "parameters": [
+          {
+            "id": "022b99ef-8f5f-4dfc-a599-81300086faa6",
+            "version": "KqlParameterItem/1.0",
+            "name": "nicWithPrivateEndpoints",
+            "type": 1,
+            "query": "Resources\n| where type =~ 'Microsoft.Network/privateEndpoints'\n| extend nics = parse_json(parse_json(properties).networkInterfaces)\n| mv-expand nics\n| project value=nics.id",
+            "crossComponentResources": [
+              "{Subscriptions}"
+            ],
+            "isHiddenWhenLocked": true,
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          }
+        ],
+        "style": "above",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "compute"
+        },
+        {
+          "parameterName": "compute",
+          "comparison": "isEqualTo",
+          "value": "azure"
+        },
+        {
+          "parameterName": "hardware",
+          "comparison": "isEqualTo",
+          "value": "orphanednics"
+        }
+      ],
+      "name": "query - Networking Details - NIC attached to a Private Endpoint"
+    },
+    {
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type contains \"microsoft.network/networkinterfaces\"\r\n| where properties !has 'virtualmachine'\r\n| project id, resourceGroup, location, subscriptionId",
+        "query": "resources\r\n| where type contains \"microsoft.network/networkinterfaces\"\r\n| where \"{nicWithPrivateEndpoints}\" !has id  \r\n| where properties !has 'virtualmachine'\r\n| project id, resourceGroup, location, subscriptionId",
         "size": 2,
         "noDataMessage": "No orphaned nics found",
         "noDataMessageStyle": 3,
@@ -2573,7 +2621,7 @@
             "multiSelect": true,
             "quote": "'",
             "delimiter": ",",
-            "query": "Resources\n| where type =~ 'Microsoft.Network/networkWatchers/flowlogs'\n| extend provisioningState = parse_json(properties).provisioningState \n| extend workspaceResourceId = tostring(parse_json(parse_json(parse_json(properties).flowAnalyticsConfiguration).networkWatcherFlowAnalyticsConfiguration).workspaceResourceId)\n| extend targetResourceId = tostring(parse_json(properties).targetResourceId)\n| where workspaceResourceId != \"\" and provisioningState == \"Succeeded\"\n| distinct targetResourceId\n",
+            "query": "Resources\n| where type =~ 'Microsoft.Network/networkWatchers/flowlogs'\n| extend provisioningState = parse_json(properties).provisioningState \n| extend workspaceResourceId = tostring(parse_json(parse_json(parse_json(properties).flowAnalyticsConfiguration).networkWatcherFlowAnalyticsConfiguration).workspaceResourceId)\n| extend targetResourceId = iff(notempty(workspaceResourceId) and provisioningState == \"Succeeded\", tostring(parse_json(properties).targetResourceId), \"null\" ) \n| distinct targetResourceId\n",
             "crossComponentResources": [
               "{Subscriptions}"
             ],
@@ -2611,7 +2659,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs",
+        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs\r\n\r\n",
         "size": 2,
         "title": "Network Security Groups",
         "queryType": 1,
