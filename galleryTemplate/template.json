@@ -2573,7 +2573,7 @@
             "multiSelect": true,
             "quote": "'",
             "delimiter": ",",
-            "query": "Resources\n| where type =~ 'Microsoft.Network/networkWatchers/flowlogs'\n| extend provisioningState = parse_json(properties).provisioningState \n| extend workspaceResourceId = tostring(parse_json(parse_json(parse_json(properties).flowAnalyticsConfiguration).networkWatcherFlowAnalyticsConfiguration).workspaceResourceId)\n| extend targetResourceId = tostring(parse_json(properties).targetResourceId)\n| where workspaceResourceId != \"\" and provisioningState == \"Succeeded\"\n| distinct targetResourceId\n",
+            "query": "Resources\n| where type =~ 'Microsoft.Network/networkWatchers/flowlogs'\n| extend provisioningState = parse_json(properties).provisioningState \n| extend workspaceResourceId = tostring(parse_json(parse_json(parse_json(properties).flowAnalyticsConfiguration).networkWatcherFlowAnalyticsConfiguration).workspaceResourceId)\n| extend targetResourceId = iff(notempty(workspaceResourceId) and provisioningState == \"Succeeded\", tostring(parse_json(properties).targetResourceId), \"null\" ) \n| distinct targetResourceId\n",
             "crossComponentResources": [
               "{Subscriptions}"
             ],
@@ -2611,7 +2611,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs",
+        "query": "Resources\r\n| where type =~ 'microsoft.network/networksecuritygroups'\r\n| extend flowLogs = id in~ ({nsgWithflowLogs})\r\n| project subscriptionId, ['Resource group'] = strcat('/subscriptions/', subscriptionId, '/resourceGroups/', resourceGroup), ['Network Security Group'] = id, [\"Location\"]=location, [\"Traffic Analytics\"]=flowLogs\r\n\r\n",
         "size": 2,
         "title": "Network Security Groups",
         "queryType": 1,
