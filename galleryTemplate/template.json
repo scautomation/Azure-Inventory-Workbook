@@ -711,7 +711,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources | where type == \"microsoft.compute/virtualmachines\"\r\n| extend osDiskId= tostring(properties.storageProfile.osDisk.managedDisk.id)\r\n        | join kind=leftouter(resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has 'Unattached'\r\n            | where properties has 'osType'\r\n            | project OS = tostring(properties.osType), osSku = tostring(sku.name), osDiskSizeGB = toint(properties.diskSizeGB), osDiskId=tostring(id)) on osDiskId\r\n        | join kind=leftouter(Resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has \"osType\"\r\n            | where properties !has 'Unattached'\r\n            | project sku = tostring(sku.name), diskSizeGB = toint(properties.diskSizeGB), id = managedBy\r\n            | summarize sum(diskSizeGB), count(sku) by id, sku) on id\r\n| project vmId=id, OS, location, resourceGroup, subscriptionId, osDiskId, osSku, osDiskSizeGB, DataDisksGB=sum_diskSizeGB, diskSkuCount=count_sku\r\n| sort by diskSkuCount desc",
+        "query": "Resources | where type == \"microsoft.compute/virtualmachines\"\r\n| extend osDiskId= tolower(tostring(properties.storageProfile.osDisk.managedDisk.id))\r\n        | join kind=leftouter(resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has 'Unattached'\r\n            | where properties has 'osType'\r\n            | project timeCreated = tostring(properties.timeCreated), OS = tostring(properties.osType), osSku = tostring(sku.name), osDiskSizeGB = toint(properties.diskSizeGB), osDiskId=tolower(tostring(id))) on osDiskId\r\n        | join kind=leftouter(Resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has \"osType\"\r\n            | where properties !has 'Unattached'\r\n            | project sku = tostring(sku.name), diskSizeGB = toint(properties.diskSizeGB), id = managedBy\r\n            | summarize sum(diskSizeGB), count(sku) by id, sku) on id\r\n| project vmId=id, OS, location, resourceGroup, timeCreated,subscriptionId, osDiskId, osSku, osDiskSizeGB, DataDisksGB=sum_diskSizeGB, diskSkuCount=count_sku\r\n| sort by diskSkuCount desc",
         "size": 2,
         "showExportToExcel": true,
         "queryType": 1,
@@ -737,6 +737,10 @@
             {
               "columnMatch": "subscriptionId",
               "formatter": 5
+            },
+            {
+              "columnMatch": "timeCreated",
+              "formatter": 6
             }
           ],
           "rowLimit": 1000,
@@ -2627,7 +2631,6 @@
             "resourceType": "microsoft.resourcegraph/resources"
           },
           {
-            "id": "2a6c17b5-ef20-4ca7-a6f4-00901eb54ed1",
             "version": "KqlParameterItem/1.0",
             "name": "nsgWithFlowLogs",
             "label": "NSG With Flow Logs",
@@ -2638,7 +2641,8 @@
             ],
             "isHiddenWhenLocked": true,
             "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources"
+            "resourceType": "microsoft.resourcegraph/resources",
+            "id": "c8a786fc-40ff-4594-83b5-6952c6928523"
           }
         ],
         "style": "above",
