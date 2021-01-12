@@ -3149,7 +3149,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.insights/'\r\n     or type has 'microsoft.alertsmanagement/smartdetectoralertrules'\r\n     or type has 'microsoft.portal/dashboards'\r\n| where type != 'microsoft.insights/components'\r\n| extend type = case(\r\n \ttype == 'microsoft.insights/workbooks', \"Workbooks\",\r\n\ttype == 'microsoft.insights/activitylogalerts', \"Activity Log Alerts\",\r\n\ttype == 'microsoft.insights/scheduledqueryrules', \"Log Search Alerts\",\r\n\ttype == 'microsoft.insights/actiongroups', \"Action Groups\",\r\n\ttype == 'microsoft.insights/metricalerts', \"Metric Alerts\",\r\n\ttype =~ 'microsoft.alertsmanagement/smartdetectoralertrules','Smart Detection Rules',\r\n    type =~ 'microsoft.insights/webtests', 'URL Web Tests',\r\n    type =~ 'microsoft.portal/dashboards', 'Portal Dashboards',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
+        "query": "resources\r\n| where type has 'microsoft.insights/'\r\n     or type has 'microsoft.alertsmanagement/smartdetectoralertrules'\r\n     or type has 'microsoft.portal/dashboards'\r\n| where type != 'microsoft.insights/components'\r\n| extend type = case(\r\n \ttype == 'microsoft.insights/workbooks', \"Workbooks\",\r\n\ttype == 'microsoft.insights/activitylogalerts', \"Activity Log Alerts\",\r\n\ttype == 'microsoft.insights/scheduledqueryrules', \"Log Search Alerts\",\r\n\ttype == 'microsoft.insights/actiongroups', \"Action Groups\",\r\n\ttype == 'microsoft.insights/metricalerts', \"Metric Alerts\",\r\n\ttype =~ 'microsoft.alertsmanagement/smartdetectoralertrules','Smart Detection Rules',\r\n    type =~ 'microsoft.insights/webtests', 'URL Web Tests',\r\n    type =~ 'microsoft.portal/dashboards', 'Portal Dashboards',\r\n    type =~ 'microsoft.insights/datacollectionrules', 'Data Collection Rules',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
         "size": 1,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -4667,7 +4667,7 @@
             "crossComponentResources": [
               "{Subscriptions}"
             ],
-            "value": [],
+            "value": null,
             "typeSettings": {
               "additionalResourceOptions": [
                 "value::1",
@@ -4961,7 +4961,7 @@
     }
   ],
   "fallbackResourceIds": [
-    "azure monitor"
+    "Azure Monitor"
   ],
   "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
 }
