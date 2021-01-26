@@ -37,7 +37,6 @@ New-AzResourceGroupDeployment -Name $(("$workbookType-$workbookDisplayName").rep
   -workbookDisplayName $workbookDisplayName `
   -workbookType $workbookType `
   -workbookSourceId $workbookSourceId `
-  -workbookSerializedData ($workbookSerializedData | ConvertTo-Json -Depth 20) `
   -Confirm -ErrorAction Stop
 
 ```
