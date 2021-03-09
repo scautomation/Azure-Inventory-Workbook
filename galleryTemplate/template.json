@@ -36,8 +36,7 @@
             "typeSettings": {
               "additionalResourceOptions": []
             },
-            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]",
-            "value": "Change Log"
+            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]"
           }
         ],
         "style": "pills",
@@ -1600,6 +1599,14 @@
             "style": "link"
           },
           {
+            "id": "98122f89-2281-4cee-9681-1212ee8ea496",
+            "cellValue": "paas",
+            "linkTarget": "parameter",
+            "linkLabel": "ML/AI",
+            "subTarget": "mlai",
+            "style": "link"
+          },
+          {
             "id": "a4e4ea2e-4c32-4143-92bd-27473db8bc81",
             "cellValue": "paas",
             "linkTarget": "parameter",
@@ -1613,14 +1620,6 @@
             "linkTarget": "parameter",
             "linkLabel": "Windows Virtual Desktop",
             "subTarget": "wvd",
-            "style": "link"
-          },
-          {
-            "id": "98122f89-2281-4cee-9681-1212ee8ea496",
-            "cellValue": "paas",
-            "linkTarget": "parameter",
-            "linkLabel": "ML/AI",
-            "subTarget": "mlai",
             "style": "link"
           }
         ]
@@ -2780,6 +2779,25 @@
       "name": "query - PaaS - Containers Overview"
     },
     {
+      "type": 1,
+      "content": {
+        "json": "### Detailed View\r\n\r\n💡 select 'View Details' to see full return from Azure Resource Graph"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "paas"
+        },
+        {
+          "parameterName": "paas",
+          "comparison": "isEqualTo",
+          "value": "containers"
+        }
+      ],
+      "name": "text - PaaS Text - Containers - Details"
+    },
+    {
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
@@ -2905,6 +2923,104 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
+        "query": "resources\r\n| where type =~ 'Microsoft.MachineLearningServices/workspaces'\r\n\tor type =~ 'microsoft.cognitiveservices/accounts'\r\n| extend type = case(\r\n\ttype =~ 'Microsoft.MachineLearningServices/workspaces', 'ML Workspaces',\r\n\ttype =~ 'microsoft.cognitiveservices/accounts', 'Cognitive Services',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type\t",
+        "size": 1,
+        "noDataMessage": "No ML/AI resources found",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "visualization": "tiles",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "$gen_group",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "Resource",
+              "formatter": 5
+            },
+            {
+              "columnMatch": "subscriptionId",
+              "formatter": 5
+            }
+          ],
+          "hierarchySettings": {
+            "treeType": 1,
+            "groupBy": [
+              "subscriptionId"
+            ],
+            "expandTopLevel": true,
+            "finalBy": "Resource"
+          }
+        },
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "type",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true,
+          "sortCriteriaField": "type",
+          "sortOrderField": 1
+        }
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "paas"
+        },
+        {
+          "parameterName": "paas",
+          "comparison": "isEqualTo",
+          "value": "mlai"
+        }
+      ],
+      "name": "query - PaaS - MLAI Overview"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "### Detailed View\r\n\r\n💡 select 'View Details' to see full return from Azure Resource Graph"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "paas"
+        },
+        {
+          "parameterName": "paas",
+          "comparison": "isEqualTo",
+          "value": "mlai"
+        }
+      ],
+      "name": "text - PaaS Text - ML/AI - Details"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
         "query": "resources\r\n| where type =~ 'Microsoft.MachineLearningServices/workspaces'\r\n\tor type =~ 'microsoft.cognitiveservices/accounts'\r\n| extend type = case(\r\n\ttype =~ 'Microsoft.MachineLearningServices/workspaces', 'ML Workspaces',\r\n\ttype =~ 'microsoft.cognitiveservices/accounts', 'Cognitive Services',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| extend Tier = sku.tier\r\n| extend sku = sku.name\r\n| extend Endpoint = case(\r\n\ttype =~ 'ML Workspaces', properties.discoveryUrl,\r\n\ttype =~ 'Cognitive Services', properties.endpoint,\r\n\t' ')\r\n| extend Capabilities = properties.capabilities\r\n| mvexpand Capabilities\r\n| extend Capabilities.value\r\n| extend Storage = properties.storageAccount\r\n| extend AppInsights = properties.applicationInsights\r\n| extend Details = pack_all()\r\n| project id, type, location, resourceGroup, subscriptionId, sku, Tier, Endpoint, Capabilities_value, Storage, AppInsights, Details",
         "size": 2,
         "noDataMessage": "No ML/AI resources found",
@@ -3025,85 +3141,6 @@
       }
     },
     {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type =~ 'Microsoft.MachineLearningServices/workspaces'\r\n\tor type =~ 'microsoft.cognitiveservices/accounts'\r\n| extend type = case(\r\n\ttype =~ 'Microsoft.MachineLearningServices/workspaces', 'ML Workspaces',\r\n\ttype =~ 'microsoft.cognitiveservices/accounts', 'Cognitive Services',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type\t",
-        "size": 1,
-        "noDataMessage": "No ML/AI resources found",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "tiles",
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": null,
-                "showIcon": true
-              }
-            },
-            {
-              "columnMatch": "Resource",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            }
-          ],
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
-            ],
-            "expandTopLevel": true,
-            "finalBy": "Resource"
-          }
-        },
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "type",
-            "formatter": 1
-          },
-          "leftContent": {
-            "columnMatch": "count_",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto"
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          },
-          "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
-        }
-      },
-      "conditionalVisibilities": [
-        {
-          "parameterName": "selectedTab",
-          "comparison": "isEqualTo",
-          "value": "paas"
-        },
-        {
-          "parameterName": "paas",
-          "comparison": "isEqualTo",
-          "value": "mlai"
-        }
-      ],
-      "name": "query - PaaS - MLAI Overview"
-    },
-    {
       "type": 1,
       "content": {
         "json": "### NoShow - End PaaS - ML/AI"
@@ -3205,6 +3242,25 @@
         }
       ],
       "name": "query - PaaS - IoT Overview"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "### Detailed View\r\n\r\n💡 select 'View Details' to see full return from Azure Resource Graph"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "paas"
+        },
+        {
+          "parameterName": "paas",
+          "comparison": "isEqualTo",
+          "value": "iot"
+        }
+      ],
+      "name": "text - PaaS Text - IoT - Details"
     },
     {
       "type": 3,
@@ -3432,6 +3488,25 @@
         }
       ],
       "name": "query - PaaS - WVD Overview "
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "### Detailed View\r\n\r\n💡 select 'View Details' to see full return from Azure Resource Graph"
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "paas"
+        },
+        {
+          "parameterName": "paas",
+          "comparison": "isEqualTo",
+          "value": "wvd"
+        }
+      ],
+      "name": "text - PaaS Text - WVD - Details"
     },
     {
       "type": 3,
@@ -5947,8 +6022,7 @@
               "durationMs": 86400000
             },
             "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources",
-            "value": null
+            "resourceType": "microsoft.resourcegraph/resources"
           }
         ],
         "style": "pills",
