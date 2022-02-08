@@ -1427,7 +1427,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "where type == \"microsoft.hybridcompute/machines\"\r\n| project MachineId=id, status = properties.status, \r\n\t\t\t  LastSeen = properties.lastStatusChange, \r\n\t\t\t  FQDN = properties.machineFqdn, \r\n\t\t\t  OS = properties.osName, \r\n\t\t\t  ServerVersion = properties.osVersion\r\n| extend ServerVersion = case(\r\n    ServerVersion has '10.0.17763', 'Server 2019',\r\n    ServerVersion has '10.0.16299', 'Server 2016',\r\n    ServerVersion has '10.0.14393', 'Server 2016',\r\n    ServerVersion has '6.3.9600', 'Server 2012 R2',\r\n\tServerVersion)",
+        "query": "where type == \"microsoft.hybridcompute/machines\"\r\n| project MachineId=id, status = properties.status, \r\n\t\t\t  LastSeen = properties.lastStatusChange, \r\n\t\t\t  FQDN = properties.machineFqdn, \r\n\t\t\t  OS = properties.osName, \r\n\t\t\t  ServerVersion = properties.osVersion\r\n| extend ServerVersion = case(\r\n    ServerVersion has '10.0.20348', 'Server 2022',\r\n    ServerVersion has '10.0.17763', 'Server 2019',\r\n    ServerVersion has '10.0.16299', 'Server 2016',\r\n    ServerVersion has '10.0.14393', 'Server 2016',\r\n    ServerVersion has '6.3.9600', 'Server 2012 R2',\r\n\tServerVersion)",
         "size": 0,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
