@@ -36,7 +36,8 @@
             "typeSettings": {
               "additionalResourceOptions": []
             },
-            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]"
+            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]",
+            "value": "Yes"
           }
         ],
         "style": "pills",
@@ -48,7 +49,8 @@
     {
       "type": 1,
       "content": {
-        "json": "## Azure Inventory Workbook\r\n### Change Log\r\nUse this report to analyze the the sizes of the different tables and Latency in your workspace and agents.  This report checks the overall workspace health.\r\n\r\n|Version|Description|\r\n|---|---|\r\n|v1.1.1| Initial Release - October 2020 - BY\r\n|v1.1.2| Add Filter to Workbooks and Alerting Resources tab - October 2020 \r\n|v1.1.3| Add NSG Traffic Analytics - October 2020\r\n|v1.1.4 | Fix orphaned nics query - November 2020\r\n|v1.1.5 | Fix sub with no network watcher - December 2020\r\n|v1.1.6 | Add VM Creation Date \r\n|v2.0 | Added Show Help and Change Log. For Overview: translated many additional Azure resource types. For Compute: Added VM Scale Sets, Added VM Overview tab with SQL and Availability set extensions. For PaaS: Added new Containers tab that has AKS and ACR resources, Added Windows Virtual Desktop (WVD) tab, Added Machine Learning & Artificial Intellgence tab, Added IoT tab. For Data: Added SQL Managed Instance, SQL Virtual Clusters, Synapse, ADX Clusters, Analysis Services, Data Factories. March 2021 - BY\r\n|v2.0.1 | Add Lab Accounts, AD Domain Services, Automanage Accounts and fixed WVD Details - March 2021 - BY\r\n\r\n### Contirbute https://github.com/scautomation/Azure-Inventory-Workbook\r\n\r\n \r\n\r\n\r\n\r\n"
+        "json": "## Azure Inventory Workbook\r\n### Change Log\r\nUse this report to analyze the the sizes of the different tables and Latency in your workspace and agents.  This report checks the overall workspace health.\r\n\r\n|Version|Description|\r\n|---|---|\r\n|v1.1.1| Initial Release - October 2020 - BY\r\n|v1.1.2| Add Filter to Workbooks and Alerting Resources tab - October 2020 \r\n|v1.1.3| Add NSG Traffic Analytics - October 2020\r\n|v1.1.4 | Fix orphaned nics query - November 2020\r\n|v1.1.5 | Fix sub with no network watcher - December 2020\r\n|v1.1.6 | Add VM Creation Date \r\n|v2.0 | Added Show Help and Change Log. For Overview: translated many additional Azure resource types. For Compute: Added VM Scale Sets, Added VM Overview tab with SQL and Availability set extensions. For PaaS: Added new Containers tab that has AKS and ACR resources, Added Windows Virtual Desktop (WVD) tab, Added Machine Learning & Artificial Intellgence tab, Added IoT tab. For Data: Added SQL Managed Instance, SQL Virtual Clusters, Synapse, ADX Clusters, Analysis Services, Data Factories. March 2021 - BY\r\n|v2.0.1 | Add Lab Accounts, AD Domain Services, Automanage Accounts and fixed WVD Details - March 2021 - BY\r\n|v2.0.2 | Added VM state on compute overview, fixed typo on change log, added colors to help file and change log, added Windows server 2022 in ARC machines tab. Feb 2022 - BY\r\n\r\n### Contribute https://github.com/scautomation/Azure-Inventory-Workbook\r\n\r\n \r\n\r\n\r\n\r\n",
+        "style": "upsell"
       },
       "conditionalVisibility": {
         "parameterName": "Help",
@@ -60,7 +62,8 @@
     {
       "type": 1,
       "content": {
-        "json": "## Help File - Azure Service Names\r\nOver time Azure services have been named and renamed, a best effort has been made to translate resource provider names to their current names. Example: microsoft.operationalinsights/workspaces is currently called Log Analytics workspaces.\r\n\r\nQueries are using a combination of case() and iif() to do the translation. Resources not translated are appended with \"Not Translated: microsoft/providername\" these are then hidden from the resulting views in the query.\r\n\r\n\r\n\r\n## Missing Resources\r\n\t- This workbook relies on Azure Resource Graph. You need reader access to all resources you wish to see in this workbook.\r\n\r\n\t- comment out \"| where type !has \"Not Translated\" \" from the query to see if your particular resource shows up.\r\n\r\n\r\n\r\n### Found an issue or something not working right? Open an issue https://github.com/scautomation/Azure-Inventory-Workbook/issues\r\n"
+        "json": "## Help File - Azure Service Names\r\nOver time Azure services have been named and renamed, a best effort has been made to translate resource provider names to their current names. Example: microsoft.operationalinsights/workspaces is currently called Log Analytics workspaces.\r\n\r\nQueries are using a combination of case() and iif() to do the translation. Resources not translated are appended with \"Not Translated: microsoft/providername\" these are then hidden from the resulting views in the query.\r\n\r\n\r\n\r\n## Missing Resources\r\n\t- This workbook relies on Azure Resource Graph. You need reader access to all resources you wish to see in this workbook.\r\n\r\n\t- comment out \"| where type !has \"Not Translated\" \" from the query to see if your particular resource shows up.\r\n\r\n\r\n\r\n### Found an issue or something not working right? Open an issue https://github.com/scautomation/Azure-Inventory-Workbook/issues\r\n",
+        "style": "success"
       },
       "conditionalVisibility": {
         "parameterName": "Help",
@@ -814,7 +817,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources \r\n| where type == \"microsoft.compute/virtualmachines\"\r\n| extend vmID = tolower(id)\r\n| extend osDiskId= tolower(tostring(properties.storageProfile.osDisk.managedDisk.id))\r\n        | join kind=leftouter(resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has 'Unattached'\r\n            | where properties has 'osType'\r\n            | project timeCreated = tostring(properties.timeCreated), OS = tostring(properties.osType), osSku = tostring(sku.name), osDiskSizeGB = toint(properties.diskSizeGB), osDiskId=tolower(tostring(id))) on osDiskId\r\n        | join kind=leftouter(resources\r\n\t\t\t| where type =~ 'microsoft.compute/availabilitysets'\r\n\t\t\t| extend VirtualMachines = array_length(properties.virtualMachines)\r\n\t\t\t| mv-expand VirtualMachine=properties.virtualMachines\r\n\t\t\t| extend FaultDomainCount = properties.platformFaultDomainCount\r\n\t\t\t| extend UpdateDomainCount = properties.platformUpdateDomainCount\r\n\t\t\t| extend vmID = tolower(VirtualMachine.id)\r\n\t\t\t| project AvailabilitySetID = id, vmID, FaultDomainCount, UpdateDomainCount ) on vmID\r\n\t\t| join kind=leftouter(resources\r\n\t\t\t| where type =~ 'microsoft.sqlvirtualmachine/sqlvirtualmachines'\r\n\t\t\t| extend SQLLicense = properties.sqlServerLicenseType\r\n\t\t\t| extend SQLImage = properties.sqlImageOffer\r\n\t\t\t| extend SQLSku = properties.sqlImageSku\r\n\t\t\t| extend SQLManagement = properties.sqlManagement\r\n\t\t\t| extend vmID = tostring(tolower(properties.virtualMachineResourceId))\r\n\t\t\t| project SQLId=id, SQLLicense, SQLImage, SQLSku, SQLManagement, vmID ) on vmID\r\n| project-away vmID1, vmID2, osDiskId1\r\n| extend Details = pack_all()\r\n| project vmID, SQLId, AvailabilitySetID, OS, resourceGroup, location, subscriptionId, SQLLicense, SQLImage,SQLSku, SQLManagement, FaultDomainCount, UpdateDomainCount, Details",
+        "query": "Resources \r\n| where type == \"microsoft.compute/virtualmachines\"\r\n| extend vmID = tolower(id)\r\n| extend osDiskId= tolower(tostring(properties.storageProfile.osDisk.managedDisk.id))\r\n| extend provisioningState = tostring(properties.extended.instanceView.powerState.displayStatus)\r\n        | join kind=leftouter(resources\r\n            | where type =~ 'microsoft.compute/disks'\r\n            | where properties !has 'Unattached'\r\n            | where properties has 'osType'\r\n            | project timeCreated = tostring(properties.timeCreated), OS = tostring(properties.osType), osSku = tostring(sku.name), osDiskSizeGB = toint(properties.diskSizeGB), osDiskId=tolower(tostring(id))) on osDiskId\r\n        | join kind=leftouter(resources\r\n\t\t\t| where type =~ 'microsoft.compute/availabilitysets'\r\n\t\t\t| extend VirtualMachines = array_length(properties.virtualMachines)\r\n\t\t\t| mv-expand VirtualMachine=properties.virtualMachines\r\n\t\t\t| extend FaultDomainCount = properties.platformFaultDomainCount\r\n\t\t\t| extend UpdateDomainCount = properties.platformUpdateDomainCount\r\n\t\t\t| extend vmID = tolower(VirtualMachine.id)\r\n\t\t\t| project AvailabilitySetID = id, vmID, FaultDomainCount, UpdateDomainCount ) on vmID\r\n\t\t| join kind=leftouter(resources\r\n\t\t\t| where type =~ 'microsoft.sqlvirtualmachine/sqlvirtualmachines'\r\n\t\t\t| extend SQLLicense = properties.sqlServerLicenseType\r\n\t\t\t| extend SQLImage = properties.sqlImageOffer\r\n\t\t\t| extend SQLSku = properties.sqlImageSku\r\n\t\t\t| extend SQLManagement = properties.sqlManagement\r\n\t\t\t| extend vmID = tostring(tolower(properties.virtualMachineResourceId))\r\n\t\t\t| project SQLId=id, SQLLicense, SQLImage, SQLSku, SQLManagement, vmID ) on vmID\r\n| project-away vmID1, vmID2, osDiskId1\r\n| extend Details = pack_all()\r\n| project vmID, SQLId, AvailabilitySetID, provisioningState, OS, resourceGroup, location, subscriptionId, SQLLicense, SQLImage,SQLSku, SQLManagement, FaultDomainCount, UpdateDomainCount, Details",
         "size": 2,
         "noDataMessage": "No VMs found",
         "showExportToExcel": true,
@@ -1206,7 +1209,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources  \r\n| where type contains \"microsoft.compute/disks\" \r\n| extend diskState = tostring(properties.diskState)\r\n| where managedBy == \"\"\r\n    or diskState == 'Unattached'\r\n| project id, diskState, resourceGroup, location, subscriptionId",
+        "query": "Resources  \r\n| where type contains \"microsoft.compute/disks\" \r\n| extend diskState = tostring(properties.diskState)\r\n| where managedBy == \"\" and diskState != 'ActiveSAS'\r\nor diskState == 'Unattached' and diskState != 'ActiveSAS'\r\n| project id, diskState, resourceGroup, location, subscriptionId",
         "size": 2,
         "noDataMessage": "No oprhaned disks found",
         "noDataMessageStyle": 3,
@@ -1427,7 +1430,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "where type == \"microsoft.hybridcompute/machines\"\r\n| project MachineId=id, status = properties.status, \r\n\t\t\t  LastSeen = properties.lastStatusChange, \r\n\t\t\t  FQDN = properties.machineFqdn, \r\n\t\t\t  OS = properties.osName, \r\n\t\t\t  ServerVersion = properties.osVersion\r\n| extend ServerVersion = case(\r\n    ServerVersion has '10.0.17763', 'Server 2019',\r\n    ServerVersion has '10.0.16299', 'Server 2016',\r\n    ServerVersion has '10.0.14393', 'Server 2016',\r\n    ServerVersion has '6.3.9600', 'Server 2012 R2',\r\n\tServerVersion)",
+        "query": "where type == \"microsoft.hybridcompute/machines\"\r\n| project MachineId=id, status = properties.status, \r\n\t\t\t  LastSeen = properties.lastStatusChange, \r\n\t\t\t  FQDN = properties.machineFqdn, \r\n\t\t\t  OS = properties.osName, \r\n\t\t\t  ServerVersion = properties.osVersion\r\n| extend ServerVersion = case(\r\n    ServerVersion has '10.0.20348', 'Server 2022',\r\n    ServerVersion has '10.0.17763', 'Server 2019',\r\n    ServerVersion has '10.0.16299', 'Server 2016',\r\n    ServerVersion has '10.0.14393', 'Server 2016',\r\n    ServerVersion has '6.3.9600', 'Server 2012 R2',\r\n\tServerVersion)",
         "size": 0,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -5926,7 +5929,8 @@
     {
       "type": 1,
       "content": {
-        "json": "## Help File - Resource tags\r\n\r\nEvery environment has different standards for tagging. Therefore you may need to chance the Environment and Application parameters to reflect the tagging standards in your environment. "
+        "json": "## Help File - Resource tags\r\n\r\nEvery environment has different standards for tagging. Therefore you may need to chance the Environment and Application parameters to reflect the tagging standards in your environment. ",
+        "style": "success"
       },
       "conditionalVisibilities": [
         {
@@ -5945,7 +5949,8 @@
     {
       "type": 1,
       "content": {
-        "json": "## Help File - Resource tags\r\n\r\nThe below query will list your untagged resources. Note that not all resources currently support tagging."
+        "json": "## Help File - Resource tags\r\n\r\nThe below query will list your untagged resources. Note that not all resources currently support tagging.",
+        "style": "success"
       },
       "conditionalVisibilities": [
         {
