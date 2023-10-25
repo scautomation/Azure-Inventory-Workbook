@@ -36,8 +36,7 @@
             "typeSettings": {
               "additionalResourceOptions": []
             },
-            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]",
-            "value": "Yes"
+            "jsonData": "[\r\n { \"value\": \"Yes\", \"label\": \"Yes\"},\r\n { \"value\": \"No\", \"label\": \"No\", \"selected\":true },\r\n { \"value\": \"Change Log\", \"label\": \"Change Log\"}\r\n]"
           }
         ],
         "style": "pills",
@@ -45,19 +44,6 @@
         "resourceType": "microsoft.operationalinsights/workspaces"
       },
       "name": "parameters - 8"
-    },
-    {
-      "type": 1,
-      "content": {
-        "json": "## Azure Inventory Workbook\r\n### Change Log\r\nUse this report to analyze the the sizes of the different tables and Latency in your workspace and agents.  This report checks the overall workspace health.\r\n\r\n|Version|Description|\r\n|---|---|\r\n|v1.1.1| Initial Release - October 2020 - BY\r\n|v1.1.2| Add Filter to Workbooks and Alerting Resources tab - October 2020 \r\n|v1.1.3| Add NSG Traffic Analytics - October 2020\r\n|v1.1.4 | Fix orphaned nics query - November 2020\r\n|v1.1.5 | Fix sub with no network watcher - December 2020\r\n|v1.1.6 | Add VM Creation Date \r\n|v2.0 | Added Show Help and Change Log. For Overview: translated many additional Azure resource types. For Compute: Added VM Scale Sets, Added VM Overview tab with SQL and Availability set extensions. For PaaS: Added new Containers tab that has AKS and ACR resources, Added Windows Virtual Desktop (WVD) tab, Added Machine Learning & Artificial Intellgence tab, Added IoT tab. For Data: Added SQL Managed Instance, SQL Virtual Clusters, Synapse, ADX Clusters, Analysis Services, Data Factories. March 2021 - BY\r\n|v2.0.1 | Add Lab Accounts, AD Domain Services, Automanage Accounts and fixed WVD Details - March 2021 - BY\r\n|v2.0.2 | Added VM state on compute overview, fixed typo on change log, added colors to help file and change log, added Windows server 2022 in ARC machines tab. Feb 2022 - BY\r\n\r\n### Contribute https://github.com/scautomation/Azure-Inventory-Workbook\r\n\r\n \r\n\r\n\r\n\r\n",
-        "style": "upsell"
-      },
-      "conditionalVisibility": {
-        "parameterName": "Help",
-        "comparison": "isEqualTo",
-        "value": "Change Log"
-      },
-      "name": "text - Change Log"
     },
     {
       "type": 11,
@@ -110,16 +96,16 @@
             "id": "1c2b6655-5c72-47bf-b4c6-9ea2665c07ef",
             "cellValue": "selectedTab",
             "linkTarget": "parameter",
-            "linkLabel": "Tagged Resources",
-            "subTarget": "tags",
+            "linkLabel": "Governance",
+            "subTarget": "governance",
             "style": "link"
           },
           {
-            "id": "284d9e1f-d3f9-477e-8fac-0fad54c0b392",
+            "id": "3bc8ec83-37dd-407d-97fa-9e2d3b309ba1",
             "cellValue": "selectedTab",
             "linkTarget": "parameter",
-            "linkLabel": "Untagged Resources",
-            "subTarget": "notag",
+            "linkLabel": "Orphaned Resources",
+            "subTarget": "orphaned",
             "style": "link"
           }
         ]
@@ -128,6 +114,32 @@
       "styleSettings": {
         "padding": "0 0 20px 0"
       }
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Azure Inventory Workbook\r\n### Change Log\r\nUse this report to analyze the the sizes of the different tables and Latency in your workspace and agents.  This report checks the overall workspace health.\r\n\r\n|Version|Description|\r\n|---|---|\r\n|v1.1.1| Initial Release - October 2020 - BY\r\n|v1.1.2| Add Filter to Workbooks and Alerting Resources tab - October 2020 \r\n|v1.1.3| Add NSG Traffic Analytics - October 2020\r\n|v1.1.4 | Fix orphaned nics query - November 2020\r\n|v1.1.5 | Fix sub with no network watcher - December 2020\r\n|v1.1.6 | Add VM Creation Date \r\n|v2.0 | Added Show Help and Change Log. For Overview: translated many additional Azure resource types. For Compute: Added VM Scale Sets, Added VM Overview tab with SQL and Availability set extensions. For PaaS: Added new Containers tab that has AKS and ACR resources, Added Windows Virtual Desktop (WVD) tab, Added Machine Learning & Artificial Intellgence tab, Added IoT tab. For Data: Added SQL Managed Instance, SQL Virtual Clusters, Synapse, ADX Clusters, Analysis Services, Data Factories. March 2021 - BY\r\n|v2.0.1 | Add Lab Accounts, AD Domain Services, Automanage Accounts and fixed WVD Details - March 2021 - BY\r\n|v2.0.2 | Added VM state on compute overview, fixed typo on change log, added colors to help file and change log, added Windows server 2022 in ARC machines tab. Feb 2022 - BY\r\n\r\n### Contribute https://github.com/scautomation/Azure-Inventory-Workbook\r\n\r\n \r\n\r\n\r\n\r\n",
+        "style": "upsell"
+      },
+      "conditionalVisibility": {
+        "parameterName": "Help",
+        "comparison": "isEqualTo",
+        "value": "Change Log"
+      },
+      "name": "text - Change Log"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Help File - Azure Service Names\r\nOver time Azure services have been named and renamed, a best effort has been made to translate resource provider names to their current names. Example: microsoft.operationalinsights/workspaces is currently called Log Analytics workspaces.\r\n\r\nQueries are using a combination of case() and iif() to do the translation. Resources not translated are appended with \"Not Translated: microsoft/providername\" these are then hidden from the resulting views in the query.\r\n\r\n\r\n\r\n## Missing Resources\r\n\t- This workbook relies on Azure Resource Graph. You need reader access to all resources you wish to see in this workbook.\r\n\r\n\t- comment out \"| where type !has \"Not Translated\" \" from the query to see if your particular resource shows up.\r\n\r\n\r\n\r\n### Found an issue or something not working right? Open an issue https://github.com/scautomation/Azure-Inventory-Workbook/issues\r\n",
+        "style": "success"
+      },
+      "conditionalVisibility": {
+        "parameterName": "Help",
+        "comparison": "isEqualTo",
+        "value": "Yes"
+      },
+      "name": "text - Help file"
     },
     {
       "type": 1,
@@ -142,195 +154,242 @@
       "name": "text - NoShow Overview"
     },
     {
-      "type": 1,
+      "type": 12,
       "content": {
-        "json": "# Overview Azure Resources"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "overview"
-      },
-      "name": "text - Title"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "Resources | summarize count(type)",
-        "size": 4,
-        "title": "Count of All Resources",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "tiles",
-        "sortBy": [],
-        "tileSettings": {
-          "titleContent": {
-            "formatter": 1,
-            "formatOptions": {
-              "showIcon": true
-            }
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "# Overview Azure Resources"
+            },
+            "name": "text - Title"
           },
-          "leftContent": {
-            "columnMatch": "count_type",
-            "formatter": 12,
-            "formatOptions": {
-              "showIcon": true
-            }
-          },
-          "showBorder": true,
-          "sortOrderField": 2
-        }
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "overview"
-      },
-      "name": "query - Overview Count"
-    },
-    {
-      "type": 1,
-      "content": {
-        "json": "## Subscriptions and Resource Groups"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "overview"
-      },
-      "name": "text - Subscriptions text"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resourcecontainers \r\n| where type has \"microsoft.resources/subscriptions/resourcegroups\"\r\n| summarize Count=count(type) by type, subscriptionId | extend type = replace(@\"microsoft.resources/subscriptions/resourcegroups\", @\"Resource Groups\", type)",
-        "size": 0,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": null,
-                "showIcon": true
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "Resources | summarize count(type)",
+              "size": 4,
+              "title": "Count of All Resources",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
+              ],
+              "visualization": "tiles",
+              "sortBy": [],
+              "tileSettings": {
+                "titleContent": {
+                  "formatter": 1,
+                  "formatOptions": {
+                    "showIcon": true
+                  }
+                },
+                "leftContent": {
+                  "columnMatch": "count_type",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "showIcon": true
+                  }
+                },
+                "showBorder": true,
+                "sortOrderField": 2
               }
             },
-            {
-              "columnMatch": "type",
-              "formatter": 16,
-              "formatOptions": {
-                "showIcon": true
+            "name": "query - Overview Count"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources | summarize count() by location\r\n| sort by count_ desc",
+              "size": 0,
+              "title": "Resource Counts by Location",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
+              ],
+              "visualization": "map",
+              "gridSettings": {
+                "sortBy": [
+                  {
+                    "itemKey": "count_",
+                    "sortOrder": 2
+                  }
+                ]
+              },
+              "sortBy": [
+                {
+                  "itemKey": "count_",
+                  "sortOrder": 2
+                }
+              ],
+              "mapSettings": {
+                "locInfo": "AzureLoc",
+                "locInfoColumn": "location",
+                "sizeSettings": "count_",
+                "sizeAggregation": "Sum",
+                "labelSettings": "location",
+                "legendMetric": "count_",
+                "legendAggregation": "Sum",
+                "itemColorSettings": {
+                  "nodeColorField": "count_",
+                  "colorAggregation": "Sum",
+                  "type": "heatmap",
+                  "heatmapPalette": "greenRed"
+                }
               }
             },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            }
-          ],
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
-            ],
-            "expandTopLevel": true
+            "name": "query - Map of resources by location"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Subscriptions and Resource Groups"
+            },
+            "name": "text - Subscriptions text"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resourcecontainers \r\n| where type has \"microsoft.resources/subscriptions/resourcegroups\"\r\n| summarize Count=count(type) by type, subscriptionId | extend type = replace(@\"microsoft.resources/subscriptions/resourcegroups\", @\"Resource Groups\", type)",
+              "size": 0,
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
+              ],
+              "gridSettings": {
+                "formatters": [
+                  {
+                    "columnMatch": "$gen_group",
+                    "formatter": 13,
+                    "formatOptions": {
+                      "linkTarget": null,
+                      "showIcon": true
+                    }
+                  },
+                  {
+                    "columnMatch": "type",
+                    "formatter": 16,
+                    "formatOptions": {
+                      "showIcon": true
+                    }
+                  },
+                  {
+                    "columnMatch": "subscriptionId",
+                    "formatter": 5
+                  }
+                ],
+                "hierarchySettings": {
+                  "treeType": 1,
+                  "groupBy": [
+                    "subscriptionId"
+                  ],
+                  "expandTopLevel": true
+                },
+                "sortBy": [
+                  {
+                    "itemKey": "Count",
+                    "sortOrder": 2
+                  }
+                ]
+              },
+              "sortBy": [
+                {
+                  "itemKey": "Count",
+                  "sortOrder": 2
+                }
+              ],
+              "tileSettings": {
+                "showBorder": false,
+                "titleContent": {
+                  "columnMatch": "type",
+                  "formatter": 1
+                },
+                "leftContent": {
+                  "columnMatch": "Count",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "palette": "auto"
+                  },
+                  "numberFormat": {
+                    "unit": 17,
+                    "options": {
+                      "maximumSignificantDigits": 3,
+                      "maximumFractionDigits": 2
+                    }
+                  }
+                }
+              }
+            },
+            "name": "query - Subscription Overview"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Resource Counts"
+            },
+            "name": "text - Overview Resource text"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "Resources \r\n//| extend type = case(\r\n//type contains 'microsoft.netapp/netappaccounts', 'NetApp Accounts',\r\n//type contains \"microsoft.compute\", \"Azure Compute\",\r\n//type contains \"microsoft.logic\", \"LogicApps\",\r\n//type contains 'microsoft.keyvault/vaults', \"Key Vaults\",\r\n//type contains 'microsoft.storage/storageaccounts', \"Storage Accounts\",\r\n//type contains 'microsoft.compute/availabilitysets', 'Availability Sets',\r\n//type contains 'microsoft.operationalinsights/workspaces', 'Azure Monitor Resources',\r\n//type contains 'microsoft.operationsmanagement', 'Operations Management Resources',\r\n//type contains 'microsoft.insights', 'Azure Monitor Resources',\r\n//type contains 'microsoft.desktopvirtualization/applicationgroups', 'WVD Application Groups',\r\n//type contains 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\n//type contains 'microsoft.desktopvirtualization/hostpools', 'WVD Hostpools',\r\n//type contains 'microsoft.recoveryservices/vaults', 'Backup Vaults',\r\n//type contains 'microsoft.web', 'App Services',\r\n//type contains 'microsoft.managedidentity/userassignedidentities','Managed Identities',\r\n//type contains 'microsoft.storagesync/storagesyncservices', 'Azure File Sync',\r\n//type contains 'microsoft.hybridcompute/machines', 'ARC Machines',\r\n//type contains 'Microsoft.EventHub', 'Event Hub',\r\n//type contains 'Microsoft.EventGrid', 'Event Grid',\r\n//type contains 'Microsoft.Sql', 'SQL Resources',\r\n//type contains 'Microsoft.HDInsight/clusters', 'HDInsight Clusters',\r\n//type contains 'microsoft.devtestlab', 'DevTest Labs Resources',\r\n//type contains 'microsoft.containerinstance', 'Container Instances Resources',\r\n//type contains 'microsoft.portal/dashboards', 'Azure Dashboards',\r\n//type contains 'microsoft.containerregistry/registries', 'Container Registry',\r\n//type contains 'microsoft.automation', 'Automation Resources',\r\n//type contains 'sendgrid.email/accounts', 'SendGrid Accounts',\r\n//type contains 'microsoft.datafactory/factories', 'Data Factory',\r\n//type contains 'microsoft.databricks/workspaces', 'Databricks Workspaces',\r\n//type contains 'microsoft.machinelearningservices/workspaces', 'Machine Learnings Workspaces',\r\n//type contains 'microsoft.alertsmanagement/smartdetectoralertrules', 'Azure Monitor Resources',\r\n//type contains 'microsoft.apimanagement/service', 'API Management Services',\r\n//type contains 'microsoft.dbforpostgresql', 'PostgreSQL Resources',\r\n//type contains 'microsoft.scheduler/jobcollections', 'Scheduler Job Collections',\r\n//type contains 'microsoft.visualstudio/account', 'Azure DevOps Organization',\r\n//type contains 'microsoft.network/', 'Network Resources',\r\n//type contains 'microsoft.migrate/' or type contains 'microsoft.offazure', 'Azure Migrate Resources',\r\n//type contains 'microsoft.servicebus/namespaces', 'Service Bus Namespaces',\r\n//type contains 'microsoft.classic', 'ASM Obsolete Resources',\r\n//type contains 'microsoft.resources/templatespecs', 'Template Spec Resources',\r\n//type contains 'microsoft.virtualmachineimages', 'VM Image Templates',\r\n//type contains 'microsoft.documentdb', 'CosmosDB DB Resources',\r\n//type contains 'microsoft.alertsmanagement/actionrules', 'Azure Monitor Resources',\r\n//type contains 'microsoft.kubernetes/connectedclusters', 'ARC Kubernetes Clusters',\r\n//type contains 'microsoft.purview', 'Purview Resources',\r\n//type contains 'microsoft.security', 'Security Resources',\r\n//type contains 'microsoft.cdn', 'CDN Resources',\r\n//type contains 'microsoft.devices','IoT Resources',\r\n//type contains 'microsoft.datamigration', 'Data Migraiton Services',\r\n//type contains 'microsoft.cognitiveservices', 'Congitive Services',\r\n//type contains 'microsoft.customproviders', 'Custom Providers',\r\n//type contains 'microsoft.appconfiguration', 'App Services',\r\n//type contains 'microsoft.search', 'Search Services',\r\n//type contains 'microsoft.maps', 'Maps',\r\n//type contains 'microsoft.containerservice/managedclusters', 'AKS',\r\n//type contains 'microsoft.signalrservice', 'SignalR',\r\n//type contains 'microsoft.resourcegraph/queries', 'Resource Graph Queries',\r\n//type contains 'microsoft.batch', 'MS Batch',\r\n//type contains 'microsoft.analysisservices', 'Analysis Services',\r\n//type contains 'microsoft.synapse/workspaces', 'Synapse Workspaces',\r\n//type contains 'microsoft.synapse/workspaces/sqlpools', 'Synapse SQL Pools',\r\n//type contains 'microsoft.kusto/clusters', 'ADX Clusters',\r\n//type contains 'microsoft.resources/deploymentscripts', 'Deployment Scripts',\r\n//type contains 'microsoft.aad/domainservices', 'AD Domain Services',\r\n//type contains 'microsoft.labservices/labaccounts', 'Lab Accounts',\r\n//type contains 'microsoft.automanage/accounts', 'Automanage Accounts',\r\n//type contains 'microsoft.relay/namespaces', 'Azure Relay',\r\n//type contains 'microsoft.notificationhubs/namespaces', 'Notification Hubs',\r\n//type contains 'microsoft.digitaltwins/digitaltwinsinstances', 'Digital Twins',\r\n//strcat(\"Not Translated: \", type))\r\n| summarize count() by type",
+              "size": 2,
+              "title": "Resource Count by Type",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
+              ],
+              "visualization": "tiles",
+              "tileSettings": {
+                "titleContent": {
+                  "columnMatch": "type",
+                  "formatter": 16,
+                  "formatOptions": {
+                    "showIcon": true
+                  }
+                },
+                "leftContent": {
+                  "columnMatch": "count_",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "min": 100,
+                    "max": 1000,
+                    "palette": "greenRed"
+                  },
+                  "numberFormat": {
+                    "unit": 17,
+                    "options": {
+                      "style": "decimal",
+                      "useGrouping": false,
+                      "maximumFractionDigits": 2,
+                      "maximumSignificantDigits": 3
+                    }
+                  }
+                },
+                "showBorder": true,
+                "sortCriteriaField": "count_",
+                "sortOrderField": 2
+              }
+            },
+            "name": "query - Overview Resource Counts by type"
           }
-        },
-        "tileSettings": {
-          "showBorder": false,
-          "titleContent": {
-            "columnMatch": "type",
-            "formatter": 1
-          },
-          "leftContent": {
-            "columnMatch": "Count",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto"
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          }
-        }
+        ]
       },
       "conditionalVisibility": {
         "parameterName": "selectedTab",
         "comparison": "isEqualTo",
         "value": "overview"
       },
-      "name": "query - Subscription Overview"
-    },
-    {
-      "type": 1,
-      "content": {
-        "json": "## Resource Counts"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "overview"
-      },
-      "name": "text - Overview Resource text"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "Resources \r\n| extend type = case(\r\ntype contains 'microsoft.netapp/netappaccounts', 'NetApp Accounts',\r\ntype contains \"microsoft.compute\", \"Azure Compute\",\r\ntype contains \"microsoft.logic\", \"LogicApps\",\r\ntype contains 'microsoft.keyvault/vaults', \"Key Vaults\",\r\ntype contains 'microsoft.storage/storageaccounts', \"Storage Accounts\",\r\ntype contains 'microsoft.compute/availabilitysets', 'Availability Sets',\r\ntype contains 'microsoft.operationalinsights/workspaces', 'Azure Monitor Resources',\r\ntype contains 'microsoft.operationsmanagement', 'Operations Management Resources',\r\ntype contains 'microsoft.insights', 'Azure Monitor Resources',\r\ntype contains 'microsoft.desktopvirtualization/applicationgroups', 'WVD Application Groups',\r\ntype contains 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\ntype contains 'microsoft.desktopvirtualization/hostpools', 'WVD Hostpools',\r\ntype contains 'microsoft.recoveryservices/vaults', 'Backup Vaults',\r\ntype contains 'microsoft.web', 'App Services',\r\ntype contains 'microsoft.managedidentity/userassignedidentities','Managed Identities',\r\ntype contains 'microsoft.storagesync/storagesyncservices', 'Azure File Sync',\r\ntype contains 'microsoft.hybridcompute/machines', 'ARC Machines',\r\ntype contains 'Microsoft.EventHub', 'Event Hub',\r\ntype contains 'Microsoft.EventGrid', 'Event Grid',\r\ntype contains 'Microsoft.Sql', 'SQL Resources',\r\ntype contains 'Microsoft.HDInsight/clusters', 'HDInsight Clusters',\r\ntype contains 'microsoft.devtestlab', 'DevTest Labs Resources',\r\ntype contains 'microsoft.containerinstance', 'Container Instances Resources',\r\ntype contains 'microsoft.portal/dashboards', 'Azure Dashboards',\r\ntype contains 'microsoft.containerregistry/registries', 'Container Registry',\r\ntype contains 'microsoft.automation', 'Automation Resources',\r\ntype contains 'sendgrid.email/accounts', 'SendGrid Accounts',\r\ntype contains 'microsoft.datafactory/factories', 'Data Factory',\r\ntype contains 'microsoft.databricks/workspaces', 'Databricks Workspaces',\r\ntype contains 'microsoft.machinelearningservices/workspaces', 'Machine Learnings Workspaces',\r\ntype contains 'microsoft.alertsmanagement/smartdetectoralertrules', 'Azure Monitor Resources',\r\ntype contains 'microsoft.apimanagement/service', 'API Management Services',\r\ntype contains 'microsoft.dbforpostgresql', 'PostgreSQL Resources',\r\ntype contains 'microsoft.scheduler/jobcollections', 'Scheduler Job Collections',\r\ntype contains 'microsoft.visualstudio/account', 'Azure DevOps Organization',\r\ntype contains 'microsoft.network/', 'Network Resources',\r\ntype contains 'microsoft.migrate/' or type contains 'microsoft.offazure', 'Azure Migrate Resources',\r\ntype contains 'microsoft.servicebus/namespaces', 'Service Bus Namespaces',\r\ntype contains 'microsoft.classic', 'ASM Obsolete Resources',\r\ntype contains 'microsoft.resources/templatespecs', 'Template Spec Resources',\r\ntype contains 'microsoft.virtualmachineimages', 'VM Image Templates',\r\ntype contains 'microsoft.documentdb', 'CosmosDB DB Resources',\r\ntype contains 'microsoft.alertsmanagement/actionrules', 'Azure Monitor Resources',\r\ntype contains 'microsoft.kubernetes/connectedclusters', 'ARC Kubernetes Clusters',\r\ntype contains 'microsoft.purview', 'Purview Resources',\r\ntype contains 'microsoft.security', 'Security Resources',\r\ntype contains 'microsoft.cdn', 'CDN Resources',\r\ntype contains 'microsoft.devices','IoT Resources',\r\ntype contains 'microsoft.datamigration', 'Data Migraiton Services',\r\ntype contains 'microsoft.cognitiveservices', 'Congitive Services',\r\ntype contains 'microsoft.customproviders', 'Custom Providers',\r\ntype contains 'microsoft.appconfiguration', 'App Services',\r\ntype contains 'microsoft.search', 'Search Services',\r\ntype contains 'microsoft.maps', 'Maps',\r\ntype contains 'microsoft.containerservice/managedclusters', 'AKS',\r\ntype contains 'microsoft.signalrservice', 'SignalR',\r\ntype contains 'microsoft.resourcegraph/queries', 'Resource Graph Queries',\r\ntype contains 'microsoft.batch', 'MS Batch',\r\ntype contains 'microsoft.analysisservices', 'Analysis Services',\r\ntype contains 'microsoft.synapse/workspaces', 'Synapse Workspaces',\r\ntype contains 'microsoft.synapse/workspaces/sqlpools', 'Synapse SQL Pools',\r\ntype contains 'microsoft.kusto/clusters', 'ADX Clusters',\r\ntype contains 'microsoft.resources/deploymentscripts', 'Deployment Scripts',\r\ntype contains 'microsoft.aad/domainservices', 'AD Domain Services',\r\ntype contains 'microsoft.labservices/labaccounts', 'Lab Accounts',\r\ntype contains 'microsoft.automanage/accounts', 'Automanage Accounts',\r\ntype contains 'microsoft.relay/namespaces', 'Azure Relay',\r\ntype contains 'microsoft.notificationhubs/namespaces', 'Notification Hubs',\r\ntype contains 'microsoft.digitaltwins/digitaltwinsinstances', 'Digital Twins',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
-        "size": 2,
-        "title": "Resource Count by Type",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "tiles",
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "type",
-            "formatter": 1
-          },
-          "leftContent": {
-            "columnMatch": "count_",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto"
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "style": "decimal",
-                "useGrouping": false,
-                "maximumFractionDigits": 2,
-                "maximumSignificantDigits": 3
-              }
-            }
-          },
-          "showBorder": true,
-          "sortCriteriaField": "count_",
-          "sortOrderField": 2
-        }
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "overview"
-      },
-      "name": "query - Overview Resource Counts by type"
+      "name": "group - Overview"
     },
     {
       "type": 1,
@@ -606,22 +665,6 @@
             "linkTarget": "parameter",
             "linkLabel": "VM Networking",
             "subTarget": "network",
-            "style": "link"
-          },
-          {
-            "id": "74bab549-0028-4018-8bf3-065b6c6fa28e",
-            "cellValue": "hardware",
-            "linkTarget": "parameter",
-            "linkLabel": "Orphaned Disks",
-            "subTarget": "orphaneddisks",
-            "style": "link"
-          },
-          {
-            "id": "a45a3005-c5b6-46a7-8873-ac1e471c51b4",
-            "cellValue": "hardware",
-            "linkTarget": "parameter",
-            "linkLabel": "Orphaned NICs",
-            "subTarget": "orphanednics",
             "style": "link"
           }
         ]
@@ -1196,228 +1239,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "Resources  \r\n| where type contains \"microsoft.compute/disks\" \r\n| extend diskState = tostring(properties.diskState)\r\n| where managedBy == \"\" and diskState != 'ActiveSAS'\r\nor diskState == 'Unattached' and diskState != 'ActiveSAS'\r\n| project id, diskState, resourceGroup, location, subscriptionId",
-        "size": 2,
-        "noDataMessage": "No oprhaned disks found",
-        "noDataMessageStyle": 3,
-        "showExportToExcel": true,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": "Resource",
-                "showIcon": true
-              }
-            },
-            {
-              "columnMatch": "id",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            }
-          ],
-          "rowLimit": 1000,
-          "filter": true,
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
-            ],
-            "expandTopLevel": true,
-            "finalBy": "id"
-          }
-        },
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "vmSize",
-            "formatter": 1,
-            "formatOptions": {
-              "showIcon": true
-            }
-          },
-          "leftContent": {
-            "columnMatch": "Count",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto",
-              "showIcon": true
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          },
-          "showBorder": true
-        },
-        "graphSettings": {
-          "type": 0,
-          "topContent": {
-            "columnMatch": "vmSize",
-            "formatter": 1
-          },
-          "centerContent": {
-            "columnMatch": "Count",
-            "formatter": 1,
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          }
-        }
-      },
-      "conditionalVisibilities": [
-        {
-          "parameterName": "selectedTab",
-          "comparison": "isEqualTo",
-          "value": "compute"
-        },
-        {
-          "parameterName": "compute",
-          "comparison": "isEqualTo",
-          "value": "azure"
-        },
-        {
-          "parameterName": "hardware",
-          "comparison": "isEqualTo",
-          "value": "orphaneddisks"
-        }
-      ],
-      "name": "query - Azure Compute - Orphaned Disks",
-      "styleSettings": {
-        "padding": "0 0 200px 0"
-      }
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type == \"microsoft.hybridcompute/machines\"\r\n| extend temptable = parse_json(properties)\r\n| mv-expand properties\r\n| extend NetworkProfile = temptable.networkProfile\r\n| extend detectedProperties = temptable.detectedProperties\r\n| project name, NetworkProfile, \r\n        detectedProperties, SerialNumber = tostring(detectedProperties.serialNumber), \r\n        smbiosAssetTag = tostring(detectedProperties.smbiosAssetTag), properties, OS = temptable.osSku, status = temptable.status, FQDN = temptable.dnsFqdn\r\n| mv-expand nic = NetworkProfile.networkInterfaces\r\n| mv-expand IP = nic.ipAddresses\r\n| extend IP = tostring(IP.address)\r\n| summarize IPs = make_set(IP) by name, tostring(status), tostring(FQDN), SerialNumber, tostring(OS)",
-        "size": 2,
-        "noDataMessage": "No orphaned nics found",
-        "noDataMessageStyle": 3,
-        "showExportToExcel": true,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "table",
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": "Resource",
-                "showIcon": true
-              }
-            },
-            {
-              "columnMatch": "id",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            }
-          ],
-          "rowLimit": 1000,
-          "filter": true,
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
-            ],
-            "expandTopLevel": true,
-            "finalBy": "id"
-          }
-        },
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "vmSize",
-            "formatter": 1,
-            "formatOptions": {
-              "showIcon": true
-            }
-          },
-          "leftContent": {
-            "columnMatch": "Count",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto",
-              "showIcon": true
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          },
-          "showBorder": true
-        },
-        "graphSettings": {
-          "type": 0,
-          "topContent": {
-            "columnMatch": "vmSize",
-            "formatter": 1
-          },
-          "centerContent": {
-            "columnMatch": "Count",
-            "formatter": 1,
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          }
-        }
-      },
-      "conditionalVisibilities": [
-        {
-          "parameterName": "selectedTab",
-          "comparison": "isEqualTo",
-          "value": "compute"
-        },
-        {
-          "parameterName": "compute",
-          "comparison": "isEqualTo",
-          "value": "azure"
-        },
-        {
-          "parameterName": "hardware",
-          "comparison": "isEqualTo",
-          "value": "orphanednics"
-        }
-      ],
-      "name": "query - Azure Compute Orphaned NICs",
-      "styleSettings": {
-        "padding": "0 0 200px 0"
-      }
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "where type == \"microsoft.hybridcompute/machines\"\r\n| extend temptable = parse_json(properties)\r\n| mv-expand properties\r\n| extend NetworkProfile = temptable.networkProfile\r\n| extend detectedProperties = temptable.detectedProperties\r\n| project MachineId=id, NetworkProfile, \r\n        detectedProperties, SerialNumber = tostring(detectedProperties.serialNumber), \r\n        smbiosAssetTag = tostring(detectedProperties.smbiosAssetTag), properties, OS = temptable.osSku, Status = temptable.status, FQDN = temptable.dnsFqdn\r\n| mv-expand nic = NetworkProfile.networkInterfaces\r\n| mv-expand IP = nic.ipAddresses\r\n| extend IP = tostring(IP.address)\r\n| summarize IPs = make_set(IP) by MachineId, tostring(FQDN), tostring(Status), SerialNumber, tostring(OS)",
+        "query": "resources\r\n| where type == \"microsoft.hybridcompute/machines\"\r\n| extend MachineId=id, \r\n        NetworkProfile = properties.networkProfile, \r\n        SerialNumber = tostring(properties.detectedProperties.serialNumber), \r\n        smbiosAssetTag = tostring(properties.detectedProperties.smbiosAssetTag), \r\n        OS = tostring(properties.osSku), \r\n        Status = tostring(properties.status), \r\n        FQDN = tostring(properties.dnsFqdn),\r\n        LastSeen = todatetime(properties.lastStatusChange),\r\n\tServerVersion = properties.osVersion\r\n| extend ServerVersion = case(\r\n    ServerVersion has '10.0.20348', 'Server 2022',\r\n    ServerVersion has '10.0.17763', 'Server 2019',\r\n    ServerVersion has '10.0.16299', 'Server 2016',\r\n    ServerVersion has '10.0.14393', 'Server 2016',\r\n    ServerVersion has '6.3.9600', 'Server 2012 R2',\r\n\tServerVersion)      \r\n| mv-expand nic = NetworkProfile.networkInterfaces\r\n| mv-expand IP = nic.ipAddresses\r\n| extend IP = tostring(IP.address)\r\n| extend Details = pack_all()\r\n| summarize IPs = make_set(IP), arg_max(LastSeen, OS, FQDN, Status, SerialNumber, Details) by MachineId",
         "size": 0,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -1428,11 +1250,11 @@
         "gridSettings": {
           "formatters": [
             {
-              "columnMatch": "status",
-              "formatter": 1
+              "columnMatch": "LastSeen",
+              "formatter": 6
             },
             {
-              "columnMatch": "LastSeen",
+              "columnMatch": "OS",
               "formatter": 1
             },
             {
@@ -1440,8 +1262,67 @@
               "formatter": 1
             },
             {
-              "columnMatch": "OS",
-              "formatter": 1
+              "columnMatch": "Status",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Expired",
+                    "representation": "3",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Disconnected",
+                    "representation": "2",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
+            },
+            {
+              "columnMatch": "Details",
+              "formatter": 7,
+              "formatOptions": {
+                "linkTarget": "CellDetails",
+                "linkLabel": "Details",
+                "linkIsContextBlade": true
+              }
+            },
+            {
+              "columnMatch": "status",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Expired",
+                    "representation": "3",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "==",
+                    "thresholdValue": "Disconnected",
+                    "representation": "2",
+                    "text": "{0}{1}"
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": "{0}{1}"
+                  }
+                ]
+              }
             },
             {
               "columnMatch": "ServerVersion",
@@ -1655,7 +1536,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.automation'\r\n\tor type has 'microsoft.logic'\r\n\tor type has 'microsoft.web/customapis'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.automation/automationaccounts', 'Automation Accounts',\r\n\ttype == 'microsoft.web/serverfarms', \"App Service Plans\",\r\n\tkind == 'functionapp', \"Azure Functions\", \r\n\tkind == \"api\", \"API Apps\", \r\n\ttype == 'microsoft.web/sites', \"App Services\",\r\n\ttype =~ 'microsoft.web/connections', 'LogicApp Connectors',\r\n\ttype =~ 'microsoft.web/customapis','LogicApp API Connectors',\r\n\ttype =~ 'microsoft.logic/workflows','LogicApps',\r\n    type =~ 'microsoft.logic/integrationaccounts', 'Integration Accounts',\r\n\ttype =~ 'microsoft.automation/automationaccounts/runbooks', 'Automation Runbooks',\r\n    type =~ 'microsoft.automation/automationaccounts/configurations', 'Automation Configurations',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type\r\n| where type !has \"Not Translated\"",
+        "query": "resources\r\n| where type has 'microsoft.automation'\r\n\tor type has 'microsoft.logic'\r\n\tor type has 'microsoft.web/customapis'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No resources found",
         "queryType": 1,
@@ -1667,7 +1548,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -1684,8 +1568,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -1842,7 +1726,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.web'\r\n\t or type =~ 'microsoft.apimanagement/service'\r\n\t or type =~ 'microsoft.network/frontdoors'\r\n\t or type =~ 'microsoft.network/applicationgateways'\r\n\t or type =~ 'microsoft.appconfiguration/configurationstores'\r\n| extend type = case(\r\n\ttype == 'microsoft.web/serverfarms', \"App Service Plans\",\r\n\tkind == 'functionapp', \"Azure Functions\", \r\n\tkind == \"api\", \"API Apps\", \r\n\ttype == 'microsoft.web/sites', \"App Services\",\r\n\ttype =~ 'microsoft.network/applicationgateways', 'App Gateways',\r\n\ttype =~ 'microsoft.network/frontdoors', 'Front Door',\r\n\ttype =~ 'microsoft.apimanagement/service', 'API Management',\r\n\ttype =~ 'microsoft.web/certificates', 'App Certificates',\r\n\ttype =~ 'microsoft.appconfiguration/configurationstores', 'App Config Stores',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type",
+        "query": "resources\r\n| where type has 'microsoft.web'\r\n\t or type =~ 'microsoft.apimanagement/service'\r\n\t or type =~ 'microsoft.network/frontdoors'\r\n\t or type =~ 'microsoft.network/applicationgateways'\r\n\t or type =~ 'microsoft.appconfiguration/configurationstores'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No resources found",
         "queryType": 1,
@@ -1882,7 +1766,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -1899,8 +1786,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -1940,7 +1827,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.web'\r\n\t or type =~ 'microsoft.apimanagement/service'\r\n\t or type =~ 'microsoft.network/frontdoors'\r\n\t or type =~ 'microsoft.network/applicationgateways'\r\n\t or type =~ 'microsoft.appconfiguration/configurationstores'\r\n| extend type = case(\r\n\ttype == 'microsoft.web/serverfarms', strcat(\"App Service Plans - \", properties.kind),\r\n\tkind == 'functionapp', \"Azure Functions\", \r\n\tkind == \"api\", \"API Apps\", \r\n\ttype == 'microsoft.web/sites', \"App Services\",\r\n\ttype =~ 'microsoft.network/applicationgateways', 'App Gateways',\r\n\ttype =~ 'microsoft.network/frontdoors', 'Front Door',\r\n\ttype =~ 'microsoft.apimanagement/service', 'API Management',\r\n\ttype =~ 'microsoft.web/certificates', 'App Certificates',\r\n\ttype =~ 'microsoft.appconfiguration/configurationstores', 'App Config Stores',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| extend Sku = case(\r\n\ttype =~ 'App Gateways', properties.sku.name, \r\n\ttype =~ 'Azure Functions', properties.sku,\r\n\ttype =~ 'API Management', sku.name,\r\n\ttype =~ 'App Service Plans', sku.name,\r\n\ttype =~ 'App Services', properties.sku,\r\n\ttype =~ 'App Config Stores', sku.name,\r\n\t' ')\r\n| extend SiteCount = case(\r\n\ttype contains 'App Service Plans', properties.numberOfSites,\r\n    ' ')\r\n| extend State = case(\r\n\ttype =~ 'App Config Stores', properties.provisioningState,\r\n\ttype contains 'App Service Plans', properties.status,\r\n\ttype =~ 'Azure Functions', properties.enabled,\r\n\ttype =~ 'App Services', properties.state,\r\n\ttype =~ 'API Management', properties.provisioningState,\r\n\ttype =~ 'App Gateways', properties.provisioningState,\r\n\ttype =~ 'Front Door', properties.provisioningState,\r\n\t' ')\r\n| mv-expand publicIpId=properties.frontendIPConfigurations\r\n| mv-expand publicIpId = publicIpId.properties.publicIPAddress.id\r\n| extend publicIpId = tostring(publicIpId)\r\n\t| join kind=leftouter(\r\n\t  \tResources\r\n  \t\t| where type =~ 'microsoft.network/publicipaddresses'\r\n  \t\t| project publicIpId = id, publicIpAddress = tostring(properties.ipAddress)) on publicIpId\r\n| extend PublicIP = case(\r\n\ttype =~ 'API Management', properties.publicIPAddresses,\r\n\ttype =~ 'App Gateways', publicIpAddress,\r\n\t' ')\r\n| extend Details = pack_all()\r\n| project Resource=id, type, subscriptionId, Sku, State, SiteCount, PublicIP, Details",
+        "query": "resources\r\n| where type has 'microsoft.web'\r\n\t or type =~ 'microsoft.apimanagement/service'\r\n\t or type =~ 'microsoft.network/frontdoors'\r\n\t or type =~ 'microsoft.network/applicationgateways'\r\n\t or type =~ 'microsoft.appconfiguration/configurationstores'\r\n| extend type = case(\r\n\ttype == 'microsoft.web/serverfarms', strcat(\"App Service Plans - \", properties.kind),\r\n\tkind == 'functionapp', \"Azure Functions\", \r\n\tkind == \"api\", \"API Apps\", \r\n\ttype == 'microsoft.web/sites', \"App Services\",\r\n\ttype =~ 'microsoft.network/applicationgateways', 'App Gateways',\r\n\ttype =~ 'microsoft.network/frontdoors', 'Front Door',\r\n\ttype =~ 'microsoft.apimanagement/service', 'API Management',\r\n\ttype =~ 'microsoft.web/certificates', 'App Certificates',\r\n\ttype =~ 'microsoft.appconfiguration/configurationstores', 'App Config Stores',\r\n    type =~ 'microsoft.web/connections', 'API Connections',\r\n\tstrcat(\"Not Translated: \", type))\r\n| extend Sku = case(\r\n\ttype =~ 'App Gateways', properties.sku.name, \r\n\ttype =~ 'Azure Functions', properties.sku,\r\n\ttype =~ 'API Management', sku.name,\r\n\ttype =~ 'App Service Plans', sku.name,\r\n\ttype =~ 'App Services', properties.sku,\r\n\ttype =~ 'App Config Stores', sku.name,\r\n\t' ')\r\n| extend SiteCount = case(\r\n\ttype contains 'App Service Plans', properties.numberOfSites,\r\n    ' ')\r\n| extend State = case(\r\n\ttype =~ 'App Config Stores', properties.provisioningState,\r\n\ttype contains 'App Service Plans', properties.status,\r\n\ttype =~ 'Azure Functions', properties.enabled,\r\n\ttype =~ 'App Services', properties.state,\r\n\ttype =~ 'API Management', properties.provisioningState,\r\n\ttype =~ 'App Gateways', properties.provisioningState,\r\n\ttype =~ 'Front Door', properties.provisioningState,\r\n\t' ')\r\n| mv-expand publicIpId=properties.frontendIPConfigurations\r\n| mv-expand publicIpId = publicIpId.properties.publicIPAddress.id\r\n| extend publicIpId = tostring(publicIpId)\r\n\t| join kind=leftouter(\r\n\t  \tResources\r\n  \t\t| where type =~ 'microsoft.network/publicipaddresses'\r\n  \t\t| project publicIpId = id, publicIpAddress = tostring(properties.ipAddress)) on publicIpId\r\n| extend PublicIP = case(\r\n\ttype =~ 'API Management', properties.publicIPAddresses,\r\n\ttype =~ 'App Gateways', publicIpAddress,\r\n\t' ')\r\n| extend Details = pack_all()\r\n| project Resource=id, type, subscriptionId, Sku, State, SiteCount, PublicIP, Details",
         "size": 2,
         "noDataMessage": "No resources found",
         "showExportToExcel": true,
@@ -2057,7 +1944,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.servicebus'\r\n\tor type has 'microsoft.eventhub'\r\n\tor type has 'microsoft.eventgrid'\r\n\tor type has 'microsoft.relay'\r\n| extend type = case(\r\n\ttype == 'microsoft.eventgrid/systemtopics', \"EventGrid System Topics\",\r\n\ttype =~ \"microsoft.eventgrid/topics\", \"EventGrid Topics\",\r\n\ttype =~ 'microsoft.eventhub/namespaces', \"EventHub Namespaces\",\r\n\ttype =~ 'microsoft.servicebus/namespaces', 'ServiceBus Namespaces',\r\n\ttype =~ 'microsoft.relay/namespaces', 'Relays',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type",
+        "query": "resources\r\n| where type has 'microsoft.servicebus'\r\n\tor type has 'microsoft.eventhub'\r\n\tor type has 'microsoft.eventgrid'\r\n\tor type has 'microsoft.relay'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No resources found",
         "queryType": 1,
@@ -2097,7 +1984,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -2114,8 +2004,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -2272,7 +2162,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources \r\n| where type has 'microsoft.documentdb'\r\n\tor type has 'microsoft.sql'\r\n\tor type has 'microsoft.dbformysql'\r\n\tor type has 'microsoft.sql'\r\n    or type has 'microsoft.purview'\r\n    or type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.analysisservices'\r\n\tor type has 'microsoft.datamigration'\r\n\tor type has 'microsoft.synapse'\r\n\tor type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.kusto'\r\n    or type has 'microsoft.dbforpostgresql'\r\n    or type has 'microsoft.digitaltwins'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.documentdb/databaseaccounts', 'CosmosDB',\r\n\ttype =~ 'microsoft.sql/servers/databases', 'SQL DBs',\r\n\ttype =~ 'microsoft.dbformysql/servers', 'MySQL',\r\n\ttype =~ 'microsoft.sql/servers', 'SQL Servers',\r\n    type =~ 'microsoft.purview/accounts', 'Purview Accounts',\r\n\ttype =~ 'microsoft.synapse/workspaces/sqlpools', 'Synapse SQL Pools',\r\n\ttype =~ 'microsoft.kusto/clusters', 'ADX Clusters',\r\n\ttype =~ 'microsoft.datafactory/factories', 'Data Factories',\r\n\ttype =~ 'microsoft.synapse/workspaces', 'Synapse Workspaces',\r\n\ttype =~ 'microsoft.analysisservices/servers', 'Analysis Services Servers',\r\n\ttype =~ 'microsoft.datamigration/services', 'DB Migration Service',\r\n\ttype =~ 'microsoft.sql/managedinstances/databases', 'Managed Instance DBs',\r\n\ttype =~ 'microsoft.sql/managedinstances', 'Managed Instnace',\r\n\ttype =~ 'microsoft.datamigration/services/projects', 'Data Migration Projects',\r\n\ttype =~ 'microsoft.sql/virtualclusters', 'SQL Virtual Clusters',\r\n    type =~ 'microsoft.dbforpostgresql/servers', 'PostgreSQL DBs',\r\n    type =~ 'microsoft.digitaltwins/digitaltwinsinstances', 'Digital Twins',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type",
+        "query": "resources \r\n| where type has 'microsoft.documentdb'\r\n\tor type has 'microsoft.sql'\r\n\tor type has 'microsoft.dbformysql'\r\n\tor type has 'microsoft.sql'\r\n    or type has 'microsoft.purview'\r\n    or type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.analysisservices'\r\n\tor type has 'microsoft.datamigration'\r\n\tor type has 'microsoft.synapse'\r\n\tor type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.kusto'\r\n    or type has 'microsoft.dbforpostgresql'\r\n    or type has 'microsoft.digitaltwins'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No resources found",
         "queryType": 1,
@@ -2312,7 +2202,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -2329,8 +2222,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -2370,7 +2263,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources \r\n| where type has 'microsoft.documentdb'\r\n\tor type has 'microsoft.sql'\r\n\tor type has 'microsoft.dbformysql'\r\n    or type has 'microsoft.purview'\r\n    or type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.analysisservices'\r\n\tor type has 'microsoft.datamigration'\r\n\tor type has 'microsoft.synapse'\r\n\tor type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.kusto'\r\n    or type has 'microsoft.dbforpostgresql'\r\n    or type has 'microsoft.digitaltwins'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.documentdb/databaseaccounts', 'CosmosDB',\r\n\ttype =~ 'microsoft.sql/servers/databases', 'SQL DBs',\r\n\ttype =~ 'microsoft.dbformysql/servers', 'MySQL',\r\n\ttype =~ 'microsoft.sql/servers', 'SQL Servers',\r\n    type =~ 'microsoft.purview/accounts', 'Purview Accounts',\r\n\ttype =~ 'microsoft.synapse/workspaces/sqlpools', 'Synapse SQL Pools',\r\n\ttype =~ 'microsoft.kusto/clusters', 'ADX Clusters',\r\n\ttype =~ 'microsoft.datafactory/factories', 'Data Factories',\r\n\ttype =~ 'microsoft.synapse/workspaces', 'Synapse Workspaces',\r\n\ttype =~ 'microsoft.analysisservices/servers', 'Analysis Services Servers',\r\n\ttype =~ 'microsoft.datamigration/services', 'DB Migration Service',\r\n\ttype =~ 'microsoft.sql/managedinstances/databases', 'Managed Instance DBs',\r\n\ttype =~ 'microsoft.sql/managedinstances', 'Managed Instnace',\r\n\ttype =~ 'microsoft.datamigration/services/projects', 'Data Migration Projects',\r\n\ttype =~ 'microsoft.sql/virtualclusters', 'SQL Virtual Clusters',\r\n    type =~ 'microsoft.dbforpostgresql/servers', 'PostgreSQL DBs',\r\n    type =~ 'microsoft.digitaltwins/digitaltwinsinstances', 'Digital Twins',\r\n    strcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| extend Sku = case(\r\n\ttype =~ 'CosmosDB', properties.databaseAccountOfferType,\r\n\ttype =~ 'SQL DBs', iif(sku.name == \"Standard\",\r\n        strcat(sku.name, \" \", properties.requestedServiceObjectiveName, \" - \", sku.capacity)\r\n        , sku.name),\r\n\ttype =~ 'MySQL', sku.name,\r\n\ttype =~ 'ADX Clusters', sku.name,\r\n\ttype =~ 'Purview Accounts', sku.name,\r\n    type =~ 'PostgreSQL DBs', strcat(sku.tier, ', ', sku.family),\r\n\t' ')\r\n| extend Status = case(\r\n\ttype =~ 'CosmosDB', properties.provisioningState,\r\n\ttype =~ 'SQL DBs', properties.status,\r\n\ttype =~ 'MySQL', properties.userVisibleState,\r\n\ttype =~ 'Managed Instance DBs', properties.status,\r\n\t' ')\r\n| extend Endpoint = case(\r\n\ttype =~ 'MySQL', properties.fullyQualifiedDomainName,\r\n\ttype =~ 'SQL Servers', properties.fullyQualifiedDomainName,\r\n\ttype =~ 'CosmosDB', properties.documentEndpoint,\r\n\ttype =~ 'ADX Clusters', properties.uri,\r\n\ttype =~ 'Purview Accounts', properties.endpoints,\r\n\ttype =~ 'Synapse Workspaces', properties.connectivityEndpoints,\r\n\ttype =~ 'Synapse SQL Pools', sku.name,\r\n\t' ')\r\n| extend Tier = sku.tier\r\n| extend License = properties.licenseType\r\n| extend maxSizeGB = todouble(case(\r\n\ttype =~ 'SQL DBs', properties.maxSizeBytes,\r\n\ttype =~ 'MySQL', properties.storageProfile.storageMB,\r\n\ttype =~ 'Synapse SQL Pools', properties.maxSizeBytes,\r\n\t' '))\r\n| extend maxSizeGB = case(\r\n\t\ttype has 'SQL DBs', maxSizeGB /1000 /1000 /1000,\r\n\t\ttype has 'Synapse SQL Pools', maxSizeGB /1000 /1000 /1000,\r\n\t\ttype has 'MySQL', maxSizeGB /1000,\r\n\t\tmaxSizeGB)\r\n| extend Details = pack_all()\r\n| project Resource=id, resourceGroup, subscriptionId, type, Sku, Tier, Status, Endpoint, maxSizeGB, Details\r\n\r\n",
+        "query": "resources \r\n| where type has 'microsoft.documentdb'\r\n\tor type has 'microsoft.sql'\r\n\tor type has 'microsoft.dbformysql'\r\n    or type has 'microsoft.purview'\r\n    or type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.analysisservices'\r\n\tor type has 'microsoft.datamigration'\r\n\tor type has 'microsoft.synapse'\r\n\tor type has 'microsoft.datafactory'\r\n\tor type has 'microsoft.kusto'\r\n    or type has 'microsoft.dbforpostgresql'\r\n    or type has 'microsoft.digitaltwins'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.documentdb/databaseaccounts', 'CosmosDB',\r\n\ttype =~ 'microsoft.sql/servers/databases', 'SQL DBs',\r\n\ttype =~ 'microsoft.dbformysql/servers', 'MySQL',\r\n\ttype =~ 'microsoft.sql/servers', 'SQL Servers',\r\n    type =~ 'microsoft.purview/accounts', 'Purview Accounts',\r\n\ttype =~ 'microsoft.synapse/workspaces/sqlpools', 'Synapse SQL Pools',\r\n\ttype =~ 'microsoft.kusto/clusters', 'ADX Clusters',\r\n\ttype =~ 'microsoft.datafactory/factories', 'Data Factories',\r\n\ttype =~ 'microsoft.synapse/workspaces', 'Synapse Workspaces',\r\n\ttype =~ 'microsoft.analysisservices/servers', 'Analysis Services Servers',\r\n\ttype =~ 'microsoft.datamigration/services', 'DB Migration Service',\r\n\ttype =~ 'microsoft.sql/managedinstances/databases', 'Managed Instance DBs',\r\n\ttype =~ 'microsoft.sql/managedinstances', 'Managed Instnace',\r\n\ttype =~ 'microsoft.datamigration/services/projects', 'Data Migration Projects',\r\n\ttype =~ 'microsoft.sql/virtualclusters', 'SQL Virtual Clusters',\r\n    type =~ 'microsoft.dbforpostgresql/servers', 'PostgreSQL DBs',\r\n    type =~ 'microsoft.digitaltwins/digitaltwinsinstances', 'Digital Twins',\r\n    strcat(\"Not Translated: \", type))\r\n| extend Sku = case(\r\n\ttype =~ 'CosmosDB', properties.databaseAccountOfferType,\r\n\ttype =~ 'SQL DBs', iif(sku.name == \"Standard\",\r\n        strcat(sku.name, \" \", properties.requestedServiceObjectiveName, \" - \", sku.capacity)\r\n        , sku.name),\r\n\ttype =~ 'MySQL', sku.name,\r\n\ttype =~ 'ADX Clusters', sku.name,\r\n\ttype =~ 'Purview Accounts', sku.name,\r\n    type =~ 'PostgreSQL DBs', strcat(sku.tier, ', ', sku.family),\r\n\t' ')\r\n| extend Status = case(\r\n\ttype =~ 'CosmosDB', properties.provisioningState,\r\n\ttype =~ 'SQL DBs', properties.status,\r\n\ttype =~ 'MySQL', properties.userVisibleState,\r\n\ttype =~ 'Managed Instance DBs', properties.status,\r\n\t' ')\r\n| extend Endpoint = case(\r\n\ttype =~ 'MySQL', properties.fullyQualifiedDomainName,\r\n\ttype =~ 'SQL Servers', properties.fullyQualifiedDomainName,\r\n\ttype =~ 'CosmosDB', properties.documentEndpoint,\r\n\ttype =~ 'ADX Clusters', properties.uri,\r\n\ttype =~ 'Purview Accounts', properties.endpoints,\r\n\ttype =~ 'Synapse Workspaces', properties.connectivityEndpoints,\r\n\ttype =~ 'Synapse SQL Pools', sku.name,\r\n\t' ')\r\n| extend Tier = sku.tier\r\n| extend License = properties.licenseType\r\n| extend maxSizeGB = todouble(case(\r\n\ttype =~ 'SQL DBs', properties.maxSizeBytes,\r\n\ttype =~ 'MySQL', properties.storageProfile.storageMB,\r\n\ttype =~ 'Synapse SQL Pools', properties.maxSizeBytes,\r\n\t' '))\r\n| extend maxSizeGB = case(\r\n\t\ttype has 'SQL DBs', maxSizeGB /1000 /1000 /1000,\r\n\t\ttype has 'Synapse SQL Pools', maxSizeGB /1000 /1000 /1000,\r\n\t\ttype has 'MySQL', maxSizeGB /1000,\r\n\t\tmaxSizeGB)\r\n| extend Details = pack_all()\r\n| project Resource=id, resourceGroup, subscriptionId, type, Sku, Tier, Status, Endpoint, maxSizeGB, Details\r\n\r\n",
         "size": 2,
         "noDataMessage": "No resources found",
         "showExportToExcel": true,
@@ -2501,7 +2394,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources \r\n| where type =~ 'microsoft.storagesync/storagesyncservices'\r\n\tor type =~ 'microsoft.recoveryservices/vaults'\r\n\tor type =~ 'microsoft.storage/storageaccounts'\r\n\tor type =~ 'microsoft.keyvault/vaults'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.storagesync/storagesyncservices', 'Azure File Sync',\r\n\ttype =~ 'microsoft.recoveryservices/vaults', 'Azure Backup',\r\n\ttype =~ 'microsoft.storage/storageaccounts', 'Storage Accounts',\r\n\ttype =~ 'microsoft.keyvault/vaults', 'Key Vaults',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type",
+        "query": "resources \r\n| where type =~ 'microsoft.storagesync/storagesyncservices'\r\n\tor type =~ 'microsoft.recoveryservices/vaults'\r\n\tor type =~ 'microsoft.storage/storageaccounts'\r\n\tor type =~ 'microsoft.keyvault/vaults'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No resources found",
         "queryType": 1,
@@ -2541,7 +2434,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -2558,8 +2454,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -2693,7 +2589,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type =~ 'microsoft.containerservice/managedclusters'\r\n\tor type =~ 'microsoft.containerregistry/registries'\r\n\tor type =~ 'microsoft.containerinstance/containergroups'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.containerservice/managedclusters', 'AKS',\r\n\ttype =~ 'microsoft.containerregistry/registries', 'Container Registry',\r\n\ttype =~ 'microsoft.containerinstance/containergroups', 'Container Instnaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type\t",
+        "query": "resources\r\n| where type =~ 'microsoft.containerservice/managedclusters'\r\n\tor type =~ 'microsoft.containerregistry/registries'\r\n\tor type =~ 'microsoft.containerinstance/containergroups'\r\n| summarize count() by type\t",
         "size": 1,
         "noDataMessage": "No Container resources found",
         "queryType": 1,
@@ -2733,7 +2629,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -2750,8 +2649,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -2791,7 +2690,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type =~ 'microsoft.containerservice/managedclusters'\r\n\tor type =~ 'microsoft.containerregistry/registries'\r\n\tor type =~ 'microsoft.containerinstance/containergroups'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.containerservice/managedclusters', 'AKS',\r\n\ttype =~ 'microsoft.containerregistry/registries', 'Container Registry',\r\n\ttype =~ 'microsoft.containerinstance/containergroups', 'Container Instnaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| extend Tier = sku.tier\r\n| extend sku = sku.name\r\n| extend State = case(\r\n\ttype =~ 'Container Registry', properties.provisioningState,\r\n\ttype =~ 'Container Instance', properties.instanceView.state,\r\n\tproperties.powerState.code)\r\n| extend Containers = properties.containers\r\n| mvexpand Containers\r\n| extend RestartCount = Containers.properties.instanceView.restartCount\r\n| extend Image = Containers.properties.image\r\n| extend RestartPolicy = properties.restartPolicy\r\n| extend IP = properties.ipAddress.ip\r\n| extend Version = properties.kubernetesVersion\r\n| extend AgentProfiles = properties.agentPoolProfiles\r\n| mvexpand AgentProfiles\r\n| extend NodeCount = AgentProfiles.[\"count\"]\r\n| extend Details = pack_all()\r\n| project id, type, location, resourceGroup, subscriptionId, sku, Tier, State, RestartCount, Version, NodeCount, Details",
+        "query": "resources\r\n| where type =~ 'microsoft.containerservice/managedclusters'\r\n\tor type =~ 'microsoft.containerregistry/registries'\r\n\tor type =~ 'microsoft.containerinstance/containergroups'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.containerservice/managedclusters', 'AKS',\r\n\ttype =~ 'microsoft.containerregistry/registries', 'Container Registry',\r\n\ttype =~ 'microsoft.containerinstance/containergroups', 'Container Instnaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| extend Tier = sku.tier\r\n| extend sku = sku.name\r\n| extend State = case(\r\n\ttype =~ 'Container Registry', properties.provisioningState,\r\n\ttype =~ 'Container Instance', properties.instanceView.state,\r\n\tproperties.powerState.code)\r\n| extend Containers = properties.containers\r\n| mvexpand Containers\r\n| extend RestartCount = Containers.properties.instanceView.restartCount\r\n| extend Image = Containers.properties.image\r\n| extend RestartPolicy = properties.restartPolicy\r\n| extend IP = properties.ipAddress.ip\r\n| extend Version = properties.kubernetesVersion\r\n| extend AgentProfiles = properties.agentPoolProfiles\r\n| mvexpand AgentProfiles\r\n| extend NodeCount = AgentProfiles.[\"count\"]\r\n| extend Details = pack_all()\r\n| project id, type, location, resourceGroup, subscriptionId, sku, Tier, State, RestartCount, Version, NodeCount, Details",
         "size": 2,
         "noDataMessage": "No Container resources found",
         "showExportToExcel": true,
@@ -2913,7 +2812,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type =~ 'Microsoft.MachineLearningServices/workspaces'\r\n\tor type =~ 'microsoft.cognitiveservices/accounts'\r\n| extend type = case(\r\n\ttype =~ 'Microsoft.MachineLearningServices/workspaces', 'ML Workspaces',\r\n\ttype =~ 'microsoft.cognitiveservices/accounts', 'Cognitive Services',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type\t",
+        "query": "resources\r\n| where type =~ 'Microsoft.MachineLearningServices/workspaces'\r\n\tor type =~ 'microsoft.cognitiveservices/accounts'\r\n| summarize count() by type\t",
         "size": 1,
         "noDataMessage": "No ML/AI resources found",
         "queryType": 1,
@@ -2953,7 +2852,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -2964,14 +2866,15 @@
             "numberFormat": {
               "unit": 17,
               "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
+                "style": "decimal",
+                "maximumFractionDigits": 2,
+                "maximumSignificantDigits": 3
               }
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -3158,7 +3061,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type =~ 'microsoft.devices/iothubs'\r\n\tor type =~ 'microsoft.iotcentral/iotapps'\r\n\tor type =~ 'microsoft.security/iotsecuritysolutions'\r\n| extend type = case (\r\n\ttype =~ 'microsoft.devices/iothubs', 'IoT Hubs',\r\n\ttype =~ 'microsoft.iotcentral/iotapps', 'IoT Apps',\r\n\ttype =~ 'microsoft.security/iotsecuritysolutions', 'IoT Security',\r\n\tstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
+        "query": "resources\r\n| where type =~ 'microsoft.devices/iothubs'\r\n\tor type =~ 'microsoft.iotcentral/iotapps'\r\n\tor type =~ 'microsoft.security/iotsecuritysolutions'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No IoT resources found",
         "queryType": 1,
@@ -3198,7 +3101,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -3215,8 +3121,8 @@
             }
           },
           "showBorder": true,
-          "sortCriteriaField": "type",
-          "sortOrderField": 1
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibilities": [
@@ -3403,7 +3309,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.desktopvirtualization'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.desktopvirtualization/applicationgroups', 'WVD App Groups',\r\n\ttype =~ 'microsoft.desktopvirtualization/hostpools', 'WVD Host Pools',\r\n\ttype =~ 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| summarize count() by type",
+        "query": "resources\r\n| where type has 'microsoft.desktopvirtualization'\r\n| summarize count() by type",
         "size": 1,
         "noDataMessage": "No WVD Resources found",
         "queryType": 1,
@@ -3444,7 +3350,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -3502,7 +3411,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.desktopvirtualization'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.desktopvirtualization/applicationgroups', 'WVD App Groups',\r\n\ttype =~ 'microsoft.desktopvirtualization/hostpools', 'WVD Host Pools',\r\n\ttype =~ 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| where type !has \"Not Translated\"\r\n| extend Details = pack_all()\r\n| project id, type, resourceGroup, subscriptionId, kind, location, Details",
+        "query": "resources\r\n| where type has 'microsoft.desktopvirtualization'\r\n| extend type = case(\r\n\ttype =~ 'microsoft.desktopvirtualization/applicationgroups', 'WVD App Groups',\r\n\ttype =~ 'microsoft.desktopvirtualization/hostpools', 'WVD Host Pools',\r\n\ttype =~ 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\n\tstrcat(\"Not Translated: \", type))\r\n| extend Details = pack_all()\r\n| project id, type, resourceGroup, subscriptionId, kind, location, Details",
         "size": 2,
         "noDataMessage": "No WVD resources found",
         "showExportToExcel": true,
@@ -3612,7 +3521,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "where type has \"microsoft.network\"\r\n    or type has 'microsoft.cdn'\r\n| extend type = case(\r\n\ttype == 'microsoft.network/networkinterfaces', \"NICs\",\r\n\ttype == 'microsoft.network/networksecuritygroups', \"NSGs\", \r\n\ttype == \"microsoft.network/publicipaddresses\", \"Public IPs\", \r\n\ttype == 'microsoft.network/virtualnetworks', \"vNets\",\r\n\ttype == 'microsoft.network/networkwatchers/connectionmonitors', \"Connection Monitors\",\r\n\ttype == 'microsoft.network/privatednszones', \"Private DNS\",\r\n\ttype == 'microsoft.network/virtualnetworkgateways', @\"vNet Gateways\",\r\n\ttype == 'microsoft.network/connections', \"Connections\",\r\n\ttype == 'microsoft.network/networkwatchers', \"Network Watchers\",\r\n\ttype == 'microsoft.network/privateendpoints', \"Private Endpoints\",\r\n\ttype == 'microsoft.network/localnetworkgateways', \"Local Network Gateways\",\r\n\ttype == 'microsoft.network/privatednszones/virtualnetworklinks', \"vNet Links\",\r\n\ttype == 'microsoft.network/dnszones', 'DNS Zones',\r\n\ttype == 'microsoft.network/networkwatchers/flowlogs', 'Flow Logs',\r\n\ttype == 'microsoft.network/routetables', 'Route Tables',\r\n\ttype == 'microsoft.network/loadbalancers', 'Load Balancers',\r\n\ttype == 'microsoft.network/ddosprotectionplans', 'DDoS Protection Plans',\r\n\ttype == 'microsoft.network/applicationsecuritygroups', 'App Security Groups',\r\n\ttype == 'microsoft.network/azurefirewalls', 'Azure Firewalls',\r\n\ttype == 'microsoft.network/applicationgateways', 'App Gateways',\r\n\ttype == 'microsoft.network/frontdoors', 'Front Doors',\r\n\ttype == 'microsoft.network/applicationgatewaywebapplicationfirewallpolicies', 'AppGateway Policies',\r\n\ttype == 'microsoft.network/bastionhosts', 'Bastion Hosts',\r\n\ttype == 'microsoft.network/frontdoorwebapplicationfirewallpolicies', 'FrontDoor Policies',\r\n\ttype == 'microsoft.network/firewallpolicies', 'Firewall Policies',\r\n\ttype == 'microsoft.network/networkintentpolicies', 'Network Intent Policies',\r\n\ttype == 'microsoft.network/trafficmanagerprofiles', 'Traffic Manager Profiles',\r\n\ttype == 'microsoft.network/publicipprefixes', 'PublicIP Prefixes',\r\n\ttype == 'microsoft.network/privatelinkservices', 'Private Link',\r\n\ttype == 'microsoft.network/expressroutecircuits', 'Express Route Circuits',\r\n\ttype =~ 'microsoft.cdn/cdnwebapplicationfirewallpolicies', 'CDN Web App Firewall Policies',\r\n\ttype =~ 'microsoft.cdn/profiles', 'CDN Profiles',\r\n\ttype =~ 'microsoft.cdn/profiles/afdendpoints', 'CDN Front Door Endpoints',\r\n\ttype =~ 'microsoft.cdn/profiles/endpoints', 'CDN Endpoints',\r\n\tstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
+        "query": "where type has \"microsoft.network\"\r\n    or type has 'microsoft.cdn'\r\n| summarize count() by type",
         "size": 2,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -3623,7 +3532,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -3691,6 +3603,14 @@
             "linkTarget": "parameter",
             "linkLabel": "NSG Rules",
             "subTarget": "nsgrules",
+            "style": "link"
+          },
+          {
+            "id": "64e6b4a1-aaed-45bf-bae8-39710cfea94e",
+            "cellValue": "network",
+            "linkTarget": "parameter",
+            "linkLabel": "IP Inventory",
+            "subTarget": "ipinventory",
             "style": "link"
           }
         ]
@@ -4105,6 +4025,91 @@
       "name": "Network Security Groups"
     },
     {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "resources\r\n| join kind=leftouter(\r\n    ResourceContainers \r\n    | where type=='microsoft.resources/subscriptions' \r\n    | project subscriptionName=name, subscriptionId\r\n) on subscriptionId\r\n| where type =~ 'Microsoft.Network/virtualNetworks'\r\n| extend addressPrefixes=array_length(properties.addressSpace.addressPrefixes)\r\n| extend vNetAddressSpace=properties.addressSpace.addressPrefixes\r\n| mv-expand subnet=properties.subnets\r\n| extend virtualNetwork = name\r\n| extend subnetPrefix = subnet.properties.addressPrefix\r\n| extend subnets = properties.subnets\r\n| extend subnetName = tostring(subnet.name)\r\n| extend prefixLength = toint(split(subnetPrefix, \"/\")[1])\r\n| extend addressPrefix = split(subnetPrefix, \"/\")[0]\r\n| extend numberOfIpAddresses = trim_end(\".0\",tostring(pow(2, 32 - prefixLength) - 5))\r\n| extend startIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),\".\"), \".\", tostring(0))\r\n| extend endIp = strcat(strcat_array((array_slice(split(addressPrefix, '.'), 0, 2)),\".\"), \".\", trim_end(\".0\",tostring(pow(2, 32 - prefixLength) - 5)))\r\n| extend endIPNew = case(prefixLength == 23, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'1.255'),\r\n    prefixLength == 22, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'3.255'),\r\n    prefixLength == 21, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'7.255'),\r\n    prefixLength == 20, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'15.255'),\r\n    prefixLength == 19, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'31.255'),\r\n    prefixLength == 18, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'63.255'),\r\n    prefixLength == 17, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'127.255'),\r\n    prefixLength == 16, strcat(strcat(strcat_array((array_slice(split(startIp,'.'), 0, 1)), \".\"), \".\"),'255.255'),\r\n    'unknown'\r\n)\r\n| extend finalendIPaddress = iff(endIPNew == \"unknown\", endIp, endIPNew) \r\n| join kind=leftouter (\r\n    // Number of connected devices per VNet and Subnet\r\n    resources\r\n    | join kind=leftouter(\r\n        resourcecontainers \r\n        | where type=='microsoft.resources/subscriptions' \r\n        | project subscriptionName=name, subscriptionId\r\n    ) on subscriptionId\r\n    | where type =~ 'microsoft.network/networkinterfaces'\r\n    | project id, ipConfigurations = properties.ipConfigurations, virtualMachine = tostring(split(properties.virtualMachine.id,\"/\",8)[0]), subscriptionId\r\n    | mvexpand ipConfigurations\r\n    | project id, subnetId = tostring(ipConfigurations.properties.subnet.id), subscriptionId, virtualMachine\r\n    | parse kind=regex subnetId with '/virtualNetworks/' virtualNetwork '/subnets/' subnet\r\n    | extend resourceGroup = tostring(split(subnetId,\"/\",4)[0])\r\n    | extend subnetName = subnet\r\n    | summarize usedIPAddresses = count() by subnetName, virtualNetwork, subscriptionId\r\n)\r\non subnetName, virtualNetwork, subscriptionId\r\n| extend usedIPAddresses_new = iff(isnull(usedIPAddresses),0,usedIPAddresses)\r\n| project subscriptionId, resourceGroup, virtualNetwork, SubnetName = subnet.name, IPRange = strcat(startIp, \" - \", finalendIPaddress), numberOfIpAddresses, usedIPAddresses, AvailableIPAddresses = (toint(numberOfIpAddresses) - usedIPAddresses_new)",
+        "size": 0,
+        "title": "IP Inventory",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "$gen_group",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "Subscription",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "subscriptionId",
+              "formatter": 5
+            },
+            {
+              "columnMatch": "resourceGroup",
+              "formatter": 5
+            },
+            {
+              "columnMatch": "Group",
+              "formatter": 15,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            },
+            {
+              "columnMatch": "subscriptionName",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            }
+          ],
+          "hierarchySettings": {
+            "treeType": 1,
+            "groupBy": [
+              "subscriptionId"
+            ],
+            "expandTopLevel": true,
+            "finalBy": "resourceGroup"
+          },
+          "labelSettings": [
+            {
+              "columnId": "subscriptionId",
+              "label": "Subscription"
+            }
+          ]
+        }
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "selectedTab",
+          "comparison": "isEqualTo",
+          "value": "network"
+        },
+        {
+          "parameterName": "network",
+          "comparison": "isEqualTo",
+          "value": "ipinventory"
+        }
+      ],
+      "name": "query - IP Inventory"
+    },
+    {
       "type": 1,
       "content": {
         "json": "## End Networking\r\n\r\n\r\n## Begin Monitoring & Security"
@@ -4132,7 +4137,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources \r\n| where type =~ 'microsoft.operationalinsights/workspaces'\r\nor type =~ 'microsoft.insights/components'\r\n| summarize count() by type\r\n| extend type = case(\r\ntype == 'microsoft.insights/components', \"Application Insights\",\r\ntype == 'microsoft.operationalinsights/workspaces', \"Log Analytics workspaces\",\r\nstrcat(type, type))",
+        "query": "resources \r\n| where type =~ 'microsoft.operationalinsights/workspaces'\r\nor type =~ 'microsoft.insights/components'\r\n| summarize count() by type",
         "size": 4,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -4403,7 +4408,10 @@
         "tileSettings": {
           "titleContent": {
             "columnMatch": "type",
-            "formatter": 1
+            "formatter": 16,
+            "formatOptions": {
+              "showIcon": true
+            }
           },
           "leftContent": {
             "columnMatch": "count_",
@@ -4419,7 +4427,9 @@
               }
             }
           },
-          "showBorder": true
+          "showBorder": true,
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
         }
       },
       "conditionalVisibility": {
@@ -4445,7 +4455,7 @@
       "type": 3,
       "content": {
         "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type has 'microsoft.insights/'\r\n     or type has 'microsoft.alertsmanagement/smartdetectoralertrules'\r\n     or type has 'microsoft.portal/dashboards'\r\n| where type != 'microsoft.insights/components'\r\n| extend type = case(\r\n \ttype == 'microsoft.insights/workbooks', \"Workbooks\",\r\n\ttype == 'microsoft.insights/activitylogalerts', \"Activity Log Alerts\",\r\n\ttype == 'microsoft.insights/scheduledqueryrules', \"Log Search Alerts\",\r\n\ttype == 'microsoft.insights/actiongroups', \"Action Groups\",\r\n\ttype == 'microsoft.insights/metricalerts', \"Metric Alerts\",\r\n\ttype =~ 'microsoft.alertsmanagement/smartdetectoralertrules','Smart Detection Rules',\r\n    type =~ 'microsoft.insights/webtests', 'URL Web Tests',\r\n    type =~ 'microsoft.portal/dashboards', 'Portal Dashboards',\r\n    type =~ 'microsoft.insights/datacollectionrules', 'Data Collection Rules',\r\n    type =~ 'microsoft.insights/autoscalesettings', 'Auto Scale Settings',\r\n    type =~ 'microsoft.insights/alertrules', 'Alert Rules',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
+        "query": "resources\r\n| where type has 'microsoft.insights/'\r\n     or type has 'microsoft.alertsmanagement/smartdetectoralertrules'\r\n     or type has 'microsoft.portal/dashboards'\r\n| where type != 'microsoft.insights/components'\r\n| extend type = case(\r\n \ttype == 'microsoft.insights/workbooks', \"Workbooks\",\r\n\ttype == 'microsoft.insights/activitylogalerts', \"Activity Log Alerts\",\r\n\ttype == 'microsoft.insights/scheduledqueryrules', \"Log Search Alerts\",\r\n\ttype == 'microsoft.insights/actiongroups', \"Action Groups\",\r\n\ttype == 'microsoft.insights/metricalerts', \"Metric Alerts\",\r\n\ttype =~ 'microsoft.alertsmanagement/smartdetectoralertrules','Smart Detection Rules',\r\n    type =~ 'microsoft.insights/webtests', 'URL Web Tests',\r\n    type =~ 'microsoft.portal/dashboards', 'Portal Dashboards',\r\n    type =~ 'microsoft.insights/datacollectionrules', 'Data Collection Rules',\r\n    type =~ 'microsoft.insights/autoscalesettings', 'Auto Scale Settings',\r\n    type =~ 'microsoft.insights/alertrules', 'Alert Rules',\r\n    type =~ 'microsoft.insights/datacollectionendpoints', 'Data Collection Endpoints',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type",
         "size": 1,
         "queryType": 1,
         "resourceType": "microsoft.resourcegraph/resources",
@@ -5904,395 +5914,245 @@
     {
       "type": 1,
       "content": {
-        "json": "## End Monitoring & Security\r\n\r\n## Begin Tagged Resoruces"
+        "json": "### NoShow - Begin - Governance"
       },
       "conditionalVisibility": {
         "parameterName": "noshow",
         "comparison": "isEqualTo",
         "value": "noshow"
       },
-      "name": "text - NoShow End Monitoring"
+      "name": "text - NoShow - End - App Monitoring - Security - Copy - Copy"
     },
     {
-      "type": 1,
+      "type": 12,
       "content": {
-        "json": "## Help File - Resource tags\r\n\r\nEvery environment has different standards for tagging. Therefore you may need to chance the Environment and Application parameters to reflect the tagging standards in your environment. ",
-        "style": "success"
-      },
-      "conditionalVisibilities": [
-        {
-          "parameterName": "selectedTab",
-          "comparison": "isEqualTo",
-          "value": "tags"
-        },
-        {
-          "parameterName": "Help",
-          "comparison": "isEqualTo",
-          "value": "Yes"
-        }
-      ],
-      "name": "text - Show Help - Resource Tagging"
-    },
-    {
-      "type": 1,
-      "content": {
-        "json": "## Help File - Resource tags\r\n\r\nThe below query will list your untagged resources. Note that not all resources currently support tagging.",
-        "style": "success"
-      },
-      "conditionalVisibilities": [
-        {
-          "parameterName": "Help",
-          "comparison": "isEqualTo",
-          "value": "Yes"
-        },
-        {
-          "parameterName": "selectedTab",
-          "comparison": "isEqualTo",
-          "value": "notag"
-        }
-      ],
-      "name": "text - Show Help - No Tags"
-    },
-    {
-      "type": 9,
-      "content": {
-        "version": "KqlParameterItem/1.0",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "parameters": [
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
           {
-            "id": "f89867f4-907a-49cd-add8-bded49c43bed",
-            "version": "KqlParameterItem/1.0",
-            "name": "Environment",
-            "type": 5,
-            "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
-            "query": "resources   \r\n| where tags.Environment != ''   \r\n| distinct tostring(tags.Environment)",
-            "crossComponentResources": [
-              "{Subscriptions}"
-            ],
-            "value": [
-              "value::all"
-            ],
-            "typeSettings": {
-              "additionalResourceOptions": [
-                "value::1",
-                "value::all"
-              ],
-              "showDefault": false
+            "type": 1,
+            "content": {
+              "json": "# Governance\r\n\r\nSummary and inventory of Policy data and tagging data.\r\n\r\n*Note: RBAC and Azure AD data are not available in Azure Resource Graph* "
             },
-            "timeContext": {
-              "durationMs": 86400000
-            },
-            "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources"
+            "name": "text - 3"
           },
           {
-            "id": "ef32b148-7ea7-4af4-aaf7-b6a87f2d00d7",
-            "version": "KqlParameterItem/1.0",
-            "name": "Application",
-            "type": 5,
-            "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
-            "query": "resources \r\n| where tags.Environment in~ ({Environment}) or '*' in~ ({Environment})\r\n| where tags.Application != ''   \r\n| distinct tostring(tags.Application)  ",
-            "crossComponentResources": [
-              "{Subscriptions}"
-            ],
-            "typeSettings": {
-              "additionalResourceOptions": [
-                "value::1",
-                "value::all"
+            "type": 11,
+            "content": {
+              "version": "LinkItem/1.0",
+              "style": "tabs",
+              "links": [
+                {
+                  "id": "a3827935-8289-4826-84ae-4a1d5e6a555e",
+                  "cellValue": "policy",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Policy",
+                  "style": "link"
+                },
+                {
+                  "id": "9cc30d56-db75-4588-abcd-c6e468adfc8e",
+                  "cellValue": "tagging",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Tagging",
+                  "style": "link"
+                }
+              ]
+            },
+            "name": "links - 0"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "### Total Count of Assignments, Compliant Resources, Non Compliant Resources and unique counts of Policies and Initiatives deployed."
+            },
+            "name": "text - 2"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "policyresources\r\n| where type =~ 'microsoft.policyinsights/policystates'\r\n| extend AssignmentName = tostring(properties.policyAssignmentName), Initiative = tostring(properties.policySetDefinitionId), \r\n         PolicyDefintion = tostring(properties.policyDefinitionId), Compliance = tostring(properties.complianceState),\r\n         DefinitionReferrence = tostring(properties.policyDefinitionReferenceId), DefinitionCategory = tostring(properties.policySetDefinitionCategory),\r\n         Scope = tostring(properties.policyAssignmentScope), PolicyAction = tostring(properties.policyDefinitionAction),\r\n         ResourceType = tostring(properties.resourceType)\r\n| summarize Assignments = count(AssignmentName), \r\n            [\"Initiatives Deployed\"] = dcountif(Initiative, isnotnull(Initiative)), \r\n            [\"Policies Deployed\"] = dcountif(PolicyDefintion, isempty(Initiative)),\r\n            [\"Compliant Resources\"] = countif(Compliance == 'Compliant'),\r\n            [\"Non Compliant Resources\"] = countif(Compliance != 'Compliant')\r\n| extend Chart = pack_all()\r\n| project Chart\r\n| mv-expand bagexpansion = array Chart\r\n| project tostring(name = Chart[0]), todouble(val = Chart[1])",
+              "size": 4,
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
               ],
-              "showDefault": false
+              "visualization": "tiles",
+              "tileSettings": {
+                "titleContent": {
+                  "columnMatch": "name"
+                },
+                "leftContent": {
+                  "columnMatch": "val",
+                  "formatter": 12,
+                  "formatOptions": {
+                    "palette": "auto"
+                  }
+                },
+                "showBorder": true,
+                "sortCriteriaField": "val",
+                "sortOrderField": 2
+              }
             },
-            "timeContext": {
-              "durationMs": 86400000
+            "name": "query - 1"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "policyresources\r\n| where type =~ 'microsoft.policyinsights/policystates'\r\n| extend AssignmentName = tostring(properties.policyAssignmentName), Initiative = tostring(properties.policySetDefinitionId), \r\n         PolicyDefintion = tostring(properties.policyDefinitionId), Compliance = tostring(properties.complianceState),\r\n         DefinitionReferrence = tostring(properties.policyDefinitionReferenceId), DefinitionCategory = tostring(properties.policySetDefinitionCategory),\r\n         Scope = tostring(properties.policyAssignmentScope), PolicyAction = tostring(properties.policyDefinitionAction),\r\n         ResourceType = tostring(properties.resourceType)\r\n| summarize Assignments = count(AssignmentName), \r\n            [\"Initiatives Deployed\"] = dcountif(Initiative, isnotnull(Initiative)), \r\n            [\"Policies Deployed\"] = dcountif(PolicyDefintion, isempty(Initiative)) by subscriptionId\r\n| order by ['Assignments'] desc",
+              "size": 0,
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscriptions}"
+              ],
+              "gridSettings": {
+                "formatters": [
+                  {
+                    "columnMatch": "$gen_group",
+                    "formatter": 15,
+                    "formatOptions": {
+                      "linkTarget": null,
+                      "showIcon": true
+                    }
+                  },
+                  {
+                    "columnMatch": "Group",
+                    "formatter": 15,
+                    "formatOptions": {
+                      "linkTarget": null,
+                      "showIcon": true
+                    }
+                  },
+                  {
+                    "columnMatch": "subscriptionId",
+                    "formatter": 5
+                  }
+                ],
+                "hierarchySettings": {
+                  "treeType": 1,
+                  "groupBy": [
+                    "subscriptionId"
+                  ],
+                  "expandTopLevel": true
+                }
+              }
             },
-            "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources"
+            "name": "query - 4"
           }
-        ],
-        "style": "pills",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "tags"
-      },
-      "name": "parameters - Tagged Resources"
-    },
-    {
-      "type": 1,
-      "content": {
-        "json": "## Showing Resources for {Environment} and Application(s) {Application}"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "tags"
-      },
-      "name": "text - Show Text for Tagged Selections"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type != 'microsoft.network/networkinterfaces'\r\n| where type != 'microsoft.compute/disks'\r\n| where tags.Environment in~ ({Environment}) or '*' in~ ({Environment})\r\n| where tags.Application in~ ({Application}) or '*' in~ ({Application})\r\n| extend type = case(\r\ntype =~ 'microsoft.network/networksecuritygroups', \"NSGs\", \r\ntype =~ \"microsoft.network/publicipaddresses\", \"Public IPs\", \r\ntype =~ 'microsoft.network/virtualnetworks', \"vNets\",\r\ntype =~ 'microsoft.network/networkwatchers/connectionmonitors', \"Connection Monitors\",\r\ntype =~ 'microsoft.network/privatednszones', \"Private DNS\",\r\ntype =~ 'microsoft.network/virtualnetworkgateways', \"vNet Gateways\",\r\ntype =~ 'microsoft.network/connections', \"Connections\",\r\ntype =~ 'microsoft.network/networkwatchers', \"Network Watchers\",\r\ntype =~ 'microsoft.network/privateendpoints', \"Private Endpoints\",\r\ntype =~ 'microsoft.network/localnetworkgateways', \"Local Network Gateways\",\r\ntype =~ 'microsoft.network/privatednszones/virtualnetworklinks', \"vNet Links\",\r\ntype =~ 'microsoft.web/serverfarms', \"App Service Plans\",\r\nkind == 'functionapp', \"Azure Functions\", \r\nkind == \"api\", \"API Apps\", \r\ntype =~ 'microsoft.web/sites', \"App Services\",\r\ntype =~ \"microsoft.compute/virtualmachines\", \"Azure Compute\",\r\ntype =~ \"microsoft.logic/workflows\", \"LogicApps\",\r\ntype =~ 'microsoft.keyvault/vaults', \"Key Vaults\",\r\ntype =~ 'microsoft.keyvault/vaults', \"Hybrid Compute\",\r\ntype =~ 'microsoft.storage/storageaccounts', \"Storage Accounts\",\r\ntype =~ 'microsoft.compute/availabilitysets', 'Availability Sets',\r\ntype =~ 'microsoft.insights/components','Application Insights',\r\ntype =~ 'microsoft.desktopvirtualization/applicationgroups', 'WVD Application Groups',\r\ntype =~ 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\ntype =~ 'microsoft.desktopvirtualization/hostpools', 'WVD Hostpools',\r\nstrcat(\"Not Translated: \", type))\r\n| summarize count() by type\r\n\r\n\r\n",
-        "size": 0,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "tiles",
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "type",
-            "formatter": 1
-          },
-          "leftContent": {
-            "columnMatch": "count_",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto"
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          },
-          "showBorder": true
-        }
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "tags"
-      },
-      "name": "query - Tagged Resources"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type != 'microsoft.network/networkinterfaces'\r\n| where type != 'microsoft.compute/disks'\r\n| where tags.Environment in~ ({Environment}) or '*' in~ ({Environment})\r\n| where tags.Application in~ ({Application}) or '*' in~ ({Application})\r\n| extend type = case(\r\ntype =~ 'microsoft.network/networksecuritygroups', \"NSGs\", \r\ntype =~ \"microsoft.network/publicipaddresses\", \"Public IPs\", \r\ntype =~ 'microsoft.network/virtualnetworks', \"vNets\",\r\ntype =~ 'microsoft.network/networkwatchers/connectionmonitors', \"Connection Monitors\",\r\ntype =~ 'microsoft.network/privatednszones', \"Private DNS\",\r\ntype =~ 'microsoft.network/virtualnetworkgateways', \"vNet Gateways\",\r\ntype =~ 'microsoft.network/connections', \"Connections\",\r\ntype =~ 'microsoft.network/networkwatchers', \"Network Watchers\",\r\ntype =~ 'microsoft.network/privateendpoints', \"Private Endpoints\",\r\ntype =~ 'microsoft.network/localnetworkgateways', \"Local Network Gateways\",\r\ntype =~ 'microsoft.network/privatednszones/virtualnetworklinks', \"vNet Links\",\r\ntype =~ 'microsoft.web/serverfarms', \"App Service Plans\",\r\nkind == 'functionapp', \"Azure Functions\", \r\nkind == \"api\", \"API Apps\", \r\ntype =~ 'microsoft.web/sites', \"App Services\",\r\ntype =~ \"microsoft.compute/virtualmachines\", \"Azure Compute\",\r\ntype =~ \"microsoft.logic/workflows\", \"LogicApps\",\r\ntype =~ 'microsoft.keyvault/vaults', \"Key Vaults\",\r\ntype =~ 'microsoft.keyvault/vaults', \"Hybrid Compute\",\r\ntype =~ 'microsoft.storage/storageaccounts', \"Storage Accounts\",\r\ntype =~ 'microsoft.compute/availabilitysets', 'Availability Sets',\r\ntype =~ 'microsoft.insights/components','Application Insights',\r\ntype =~ 'microsoft.desktopvirtualization/applicationgroups', 'WVD Application Groups',\r\ntype =~ 'microsoft.desktopvirtualization/workspaces', 'WVD Workspaces',\r\ntype =~ 'microsoft.desktopvirtualization/hostpools', 'WVD Hostpools',\r\nstrcat(\"Not Translated: \", type))\r\n| extend Details = pack_all()\r\n| project id, subscriptionId, type, location, resourceGroup, Details\r\n\r\n\r\n",
-        "size": 0,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "visualization": "table",
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": "Resource",
-                "linkIsContextBlade": false,
-                "showIcon": true
-              }
-            },
-            {
-              "columnMatch": "id",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "Details",
-              "formatter": 7,
-              "formatOptions": {
-                "linkTarget": "CellDetails",
-                "linkLabel": "🔍 View Details",
-                "linkIsContextBlade": true
-              }
-            },
-            {
-              "columnMatch": "tenantId",
-              "formatter": 5
-            }
-          ],
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
-            ],
-            "expandTopLevel": true,
-            "finalBy": "id"
-          }
-        },
-        "tileSettings": {
-          "titleContent": {
-            "columnMatch": "type",
-            "formatter": 1
-          },
-          "leftContent": {
-            "columnMatch": "count_",
-            "formatter": 12,
-            "formatOptions": {
-              "palette": "auto"
-            },
-            "numberFormat": {
-              "unit": 17,
-              "options": {
-                "maximumSignificantDigits": 3,
-                "maximumFractionDigits": 2
-              }
-            }
-          },
-          "showBorder": true
-        }
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "tags"
-      },
-      "name": "query - Tagged Resources - Copy"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "Resources\r\n| where tags.Environment in~ ({Environment}) or '*' in~ ({Environment})\r\n| where tags.Application in~ ({Application}) or '*' in~ ({Application})\r\n| summarize count() by type",
-        "size": 0,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
         ]
       },
       "conditionalVisibility": {
         "parameterName": "selectedTab",
         "comparison": "isEqualTo",
-        "value": "tabs"
+        "value": "governance"
       },
-      "name": "query - Tagged Resources Summary"
+      "name": "group - Governance"
     },
     {
-      "type": 1,
+      "type": 12,
       "content": {
-        "json": "## NoShow - End Tagged Resources\r\n\r\n\r\n## NoShow - Begin Untagged Resources"
-      },
-      "conditionalVisibility": {
-        "parameterName": "noShow",
-        "comparison": "isEqualTo",
-        "value": "noShow"
-      },
-      "name": "text - NoShow Begin Untagged Resources"
-    },
-    {
-      "type": 9,
-      "content": {
-        "version": "KqlParameterItem/1.0",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "parameters": [
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
           {
-            "id": "2ca6744f-0d53-48a0-ad15-95f6dbe5aa9d",
-            "version": "KqlParameterItem/1.0",
-            "name": "ResourceType",
-            "type": 7,
-            "isRequired": true,
-            "multiSelect": true,
-            "quote": "'",
-            "delimiter": ",",
-            "query": "resources | where tags == ''\r\n| distinct type",
-            "crossComponentResources": [
-              "{Subscriptions}"
-            ],
-            "value": [
-              "value::all"
-            ],
-            "typeSettings": {
-              "additionalResourceOptions": [
-                "value::1",
-                "value::all"
+            "type": 1,
+            "content": {
+              "json": "## Orphaned Resources\r\nThis section of the Workbook will load the fantastic Orphaned Resources Workbook directly from Github. https://github.com/dolevshor/azure-orphan-resources\r\n\r\nIf you accept this, please select \"Accept\" an additional prompt will ask you to selected \"Yes\" to load the Workbook."
+            },
+            "name": "text - 113"
+          },
+          {
+            "type": 9,
+            "content": {
+              "version": "KqlParameterItem/1.0",
+              "parameters": [
+                {
+                  "id": "26e9f36d-8555-4504-baab-0c2c38fe9da7",
+                  "version": "KqlParameterItem/1.0",
+                  "name": "Accept",
+                  "label": "Do you Accept",
+                  "type": 10,
+                  "isRequired": true,
+                  "query": "{\"version\":\"1.0.0\",\"content\":\"[\\r\\n { \\\"value\\\": \\\"Yes\\\", \\\"label\\\": \\\"Yes\\\"},\\r\\n { \\\"value\\\": \\\"No\\\", \\\"label\\\": \\\"No\\\", \\\"selected\\\":true }\\r\\n]\",\"transformers\":null}",
+                  "typeSettings": {
+                    "additionalResourceOptions": [],
+                    "showDefault": false
+                  },
+                  "timeContext": {
+                    "durationMs": 86400000
+                  },
+                  "queryType": 8
+                }
               ],
-              "showDefault": false
+              "style": "pills",
+              "queryType": 8
             },
-            "timeContext": {
-              "durationMs": 86400000
+            "name": "parameters - 112"
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "template",
+              "loadFromTemplateId": "https://raw.githubusercontent.com/dolevshor/azure-orphan-resources/main/Workbook/Azure%20Orphaned%20Resources%20v2.0.workbook",
+              "items": []
             },
-            "queryType": 1,
-            "resourceType": "microsoft.resourcegraph/resources"
-          }
-        ],
-        "style": "pills",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources"
-      },
-      "conditionalVisibility": {
-        "parameterName": "selectedTab",
-        "comparison": "isEqualTo",
-        "value": "notag"
-      },
-      "name": "parameters - Untagged Resource Type"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources | where tags == ''\r\n| where type in~ ({ResourceType}) or '*' in~ ({ResourceType})\r\n| project Name=id, subscriptionId\r\n",
-        "size": 3,
-        "showExportToExcel": true,
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Subscriptions}"
-        ],
-        "gridSettings": {
-          "formatters": [
-            {
-              "columnMatch": "$gen_group",
-              "formatter": 13,
-              "formatOptions": {
-                "linkTarget": "Resource",
-                "showIcon": true
+            "conditionalVisibilities": [
+              {
+                "parameterName": "selectedTab",
+                "comparison": "isEqualTo",
+                "value": "orphaned"
+              },
+              {
+                "parameterName": "Accept",
+                "comparison": "isEqualTo",
+                "value": "Yes"
               }
-            },
-            {
-              "columnMatch": "Name",
-              "formatter": 5
-            },
-            {
-              "columnMatch": "subscriptionId",
-              "formatter": 5
-            }
-          ],
-          "rowLimit": 1000,
-          "filter": true,
-          "hierarchySettings": {
-            "treeType": 1,
-            "groupBy": [
-              "subscriptionId"
             ],
-            "expandTopLevel": true,
-            "finalBy": "Name"
+            "name": "group - 114"
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "loadType": "always",
+              "items": [
+                {
+                  "type": 12,
+                  "content": {
+                    "version": "NotebookGroup/1.0",
+                    "groupType": "template",
+                    "loadFromTemplateId": "",
+                    "items": []
+                  },
+                  "conditionalVisibility": {
+                    "parameterName": "selectedTab",
+                    "comparison": "isEqualTo",
+                    "value": "orphaned"
+                  },
+                  "name": "group - Orphaned Resources - From Github"
+                }
+              ]
+            },
+            "conditionalVisibility": {
+              "parameterName": "Accept",
+              "comparison": "isEqualTo",
+              "value": "yes"
+            },
+            "name": "group - Orphaned Resources"
           }
-        }
+        ]
       },
       "conditionalVisibility": {
         "parameterName": "selectedTab",
         "comparison": "isEqualTo",
-        "value": "notag"
+        "value": "orphaned"
       },
-      "name": "query - Untagged Resources"
+      "name": "group - Orphaned Resources"
     }
   ],
   "fallbackResourceIds": [
