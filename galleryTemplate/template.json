@@ -6097,7 +6097,7 @@
             "content": {
               "version": "NotebookGroup/1.0",
               "groupType": "template",
-              "loadFromTemplateId": "https://raw.githubusercontent.com/dolevshor/azure-orphan-resources/main/Workbook/Azure%20Orphaned%20Resources%20v2.0.workbook",
+              "loadFromTemplateId": "https://raw.githubusercontent.com/dolevshor/azure-orphan-resources/main/Workbook/Azure%20Orphaned%20Resources%20v3.0.workbook",
               "items": []
             },
             "conditionalVisibilities": [
