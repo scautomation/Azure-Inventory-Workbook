@@ -6084,7 +6084,8 @@
                   "timeContext": {
                     "durationMs": 86400000
                   },
-                  "queryType": 8
+                  "queryType": 8,
+                  "value": "Yes"
                 }
               ],
               "style": "pills",
@@ -6097,7 +6098,7 @@
             "content": {
               "version": "NotebookGroup/1.0",
               "groupType": "template",
-              "loadFromTemplateId": "https://raw.githubusercontent.com/dolevshor/azure-orphan-resources/main/Workbook/Azure%20Orphaned%20Resources%20v2.0.workbook",
+              "loadFromTemplateId": "https://raw.githubusercontent.com/dolevshor/azure-orphan-resources/refs/heads/main/Workbook/Azure%20Orphaned%20Resources%20v3.0.workbook",
               "items": []
             },
             "conditionalVisibilities": [
